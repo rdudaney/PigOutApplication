@@ -8,10 +8,10 @@
         tools:context=".MainActivity">
 
     <Button
+            android:id="@+id/start_button"
             android:text="@string/start_button_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/start_button"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
@@ -20,58 +20,29 @@
             android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="8dp"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toggleButton4"
             android:layout_marginTop="8dp"
-            app:layout_constraintVertical_bias="0.85"/>
-    <TextView
-            android:text="@string/keyword_textview"
-            android:layout_width="wrap_content"
-            android:id="@+id/keyword_textview"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="16dp"
-            app:layout_constraintHorizontal_bias="0.0"
-            android:textColor="@android:color/black"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"/>
-    <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text="@string/keyword_edittext"
-            android:ems="10"
-            android:id="@+id/keyword_edittext"
-            app:layout_constraintStart_toEndOf="@+id/keyword_textview"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            app:layout_constraintHorizontal_bias="0.184"
-            android:textSize="16sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/keyword_textview"/>
+            app:layout_constraintVertical_bias="0.85"
+            android:onClick="start_Click"/>
     <TextView
             android:text="@string/location_textview"
             android:layout_width="62dp"
             android:layout_height="wrap_content"
             android:id="@+id/location_textview"
-            android:layout_marginTop="56dp"
-            app:layout_constraintTop_toBottomOf="@+id/keyword_textview"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8sp"
+            android:layout_marginLeft="8sp"
             android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="@+id/keyword_textview"
             android:textColor="@android:color/black"
     />
     <EditText
+            android:id="@+id/location_edittext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:ems="10"
-            android:id="@+id/location_edittext"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp"
@@ -79,13 +50,11 @@
             app:layout_constraintStart_toEndOf="@+id/location_textview"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintBaseline_toBaselineOf="@+id/location_textview"/>
     <ToggleButton
-            android:text="@string/pricetogglebutton1"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/toggleButton"
+            android:id="@+id/toggleButton1"
             android:textOff="@string/pricetogglebutton1_off"
             app:layout_constraintEnd_toStartOf="@+id/toggleButton2"
             android:layout_marginEnd="8dp"
@@ -97,7 +66,6 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton2"
             android:textOn="@string/pricetogglebutton1_on"/>
     <ToggleButton
-            android:text="@string/pricetogglebutton2"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/toggleButton2"
@@ -108,10 +76,9 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/toggleButton3"
             android:layout_marginLeft="8dp"
             android:layout_marginStart="8dp"
-            app:layout_constraintStart_toEndOf="@+id/toggleButton"
+            app:layout_constraintStart_toEndOf="@+id/toggleButton1"
             android:textOn="@string/pricetogglebutton2_on"/>
     <ToggleButton
-            android:text="@string/pricetogglebutton3"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/toggleButton3"
@@ -125,7 +92,6 @@
             android:layout_marginRight="8dp"
             android:textOn="@string/pricetogglebutton3_on"/>
     <ToggleButton
-            android:text="@string/pricetogglebutton4"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:id="@+id/toggleButton4"

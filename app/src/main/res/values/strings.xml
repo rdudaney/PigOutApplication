@@ -16,4 +16,6 @@
     <string name="pricetogglebutton2_on">$$</string>
     <string name="pricetogglebutton3_on">$$$</string>
     <string name="pricetogglebutton4_on">$$$$</string>
+    <string name="next_button_text">Next</string>
+    <string name="prev_button_text">Previous</string>
 </resources>
