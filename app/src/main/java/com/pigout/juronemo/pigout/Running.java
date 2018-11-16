@@ -19,7 +19,7 @@ public class Running {
     private Yelp yelp;
     private GoogleMaps google;
 
-    public final static int SLICE = 20;
+    public final static int SLICE = 1;
 
     public Running(HashMap<String, String> startURLParam, double[] startOrigin){
         this.URLParam = startURLParam;
@@ -42,6 +42,7 @@ public class Running {
         randomInts(this.total);
         Log.d("STATE","Running created");
         Log.d("STATE", Arrays.toString(randomIntArray));
+        Log.d("STATE","this.total: " + this.total);
 
     }
 
@@ -79,6 +80,10 @@ public class Running {
             this.current++;
             return businessArray[this.randomIntArray[this.current]];
         }else{
+            // for the current condition
+            if (this.current < 0){
+                this.current++;
+            }
             for (int j = this.current; j < this.current + SLICE; j++) {
                 if (j >= this.total){
                     break;

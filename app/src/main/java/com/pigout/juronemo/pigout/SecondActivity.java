@@ -1,17 +1,19 @@
 package com.pigout.juronemo.pigout;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
 public class SecondActivity extends AppCompatActivity {
 
-    private Running currentRun;
+    public Running currentRun;
     private Business currentBus;
     private TextView BusinessName_Text;
     private TextView Address_Text;
@@ -20,6 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     private TextView RandomNum_Text;
     private Button nextBut;
     private Button prevBut;
+    private HashMap<String, String> URLParam;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +33,11 @@ public class SecondActivity extends AppCompatActivity {
         this.nextBut = findViewById(R.id.next_button);
         this.BusinessName_Text = findViewById(R.id.businessName);
         this.Address_Text = findViewById(R.id.address);
-        this.Rating_Text  = findViewById(R.id.rating);
+        this.Rating_Text = findViewById(R.id.rating);
         this.RandomNum_Text = findViewById(R.id.randomNum);
         this.CurrentNum_Text = findViewById(R.id.currentNum);
 
-        HashMap<String, String> URLParam = new HashMap<>();
+        this.URLParam = new HashMap<>();
         URLParam.put("term", "Food");
         URLParam.put("location", "Woodland-Hills-CA");
         URLParam.put("latitude", "");
@@ -50,32 +53,83 @@ public class SecondActivity extends AppCompatActivity {
         URLParam.put("open_at", "");
         URLParam.put("attributes", "");
 
-        BusinessName_Text.setText("RUNNING");
-        Log.d("STATE","test");
-        this.currentRun = new Running(URLParam,null);
-        this.currentBus = currentRun.nextBus();
-        Log.d("STATE","total: " + currentRun.getTotal());
+        runTask newTask = new runTask();
+        newTask.execute();
+
+        nextBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nextButton();
+            }
+        });
+
+        prevBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prevButton();
+            }
+        });
+
+
+    }
+
+    public void nextButton(){
+        runTask newTask = new runTask();
+        newTask.execute();
+    }
+
+    public void prevButton(){
+        currentBus = currentRun.prevBus();
         displayCurrent();
     }
 
-
-    public void displayCurrent(){
-        if (currentRun.getCurrent() <= 0){
+    public void displayCurrent() {
+        if (currentRun.getCurrent() <= 0) {
             prevBut.setVisibility(View.GONE);
-        }else if (currentRun.getCurrent() >= currentRun.getTotal()){
+        } else if (currentRun.getCurrent() >= currentRun.getTotal()) {
             nextBut.setVisibility(View.GONE);
-        }else {
+        } else {
             prevBut.setVisibility(View.VISIBLE);
             nextBut.setVisibility(View.VISIBLE);
         }
 
         BusinessName_Text.setText(currentBus.getName());
         Address_Text.setText(currentBus.getAddress());
-        Rating_Text.setText(String.format("%.1f",currentBus.getRating()));
+        Rating_Text.setText(String.format("%.1f", currentBus.getRating()));
         CurrentNum_Text.setText(currentRun.getCurrent() + " / " + currentRun.getTotal());
         RandomNum_Text.setText(currentRun.getRandom() + " / " + currentRun.getTotal());
 
 
     }
 
+
+    private class runTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            if (currentRun == null) {
+                currentRun = new Running(URLParam, null);
+            }
+            currentBus = currentRun.nextBus();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            displayCurrent();
+
+            super.onPostExecute(aVoid);
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+
+            super.onProgressUpdate(values);
+        }
+    }
 }

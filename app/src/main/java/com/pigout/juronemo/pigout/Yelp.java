@@ -130,6 +130,7 @@ public class Yelp {
     }
     // Change so instead of if the offset is close to the total, it reduces the size, change it so the offset accomoddates the maximum size
     public  Business[] get50(int offset){
+        Log.d("STATE","NewCall50");
         Log.d("STATE","yelp get 50");
         int size = MAX_LIMIT;
 
@@ -177,8 +178,8 @@ public class Yelp {
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        Log.d("STATE","HTTP URL Connection");
-        Log.d("STATE","Con: " + con.toString());
+        //Log.d("STATE","HTTP URL Connection");
+        //Log.d("STATE","Con: " + con.toString());
 
 
 
@@ -192,12 +193,14 @@ public class Yelp {
         con.setRequestProperty("Content-Type", "text/plain");
         con.setRequestProperty("charset", "UTF-8");
 
-        Log.d("STATE","Con2: " + con.toString());
+        //Log.d("STATE","Con2: " + con.toString());
 
         Log.d("STATE","Before Response code");
         int responseCode = con.getResponseCode();
         Log.d("STATE","After Response code");
         Log.d("STATE","Response code: " + responseCode);
+
+        Log.d("STATE","NewCall");
 //        System.out.println("\nSending 'GET' request to URL : " + url);
 //        System.out.println("Response Code : " + responseCode);
 
