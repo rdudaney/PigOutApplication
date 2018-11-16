@@ -18,4 +18,12 @@
     <string name="pricetogglebutton4_on">$$$$</string>
     <string name="next_button_text">Next</string>
     <string name="prev_button_text">Previous</string>
+
+    <string name="businessName_text">BUSINESS NAME</string>
+    <string name="address_text">ADDRESS</string>
+    <string name="rating_text">RATING</string>
+    <string name="currentNum_text">CURRENT NUMBER</string>
+    <string name="randomNum_text">RANDOM NUMBER</string>
+
+
 </resources>

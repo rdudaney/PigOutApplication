@@ -1,6 +1,7 @@
 package com.pigout.juronemo.pigout;
 
 import android.util.JsonReader;
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,11 +18,14 @@ public class Yelp {
     private static final int MAX_BUSINESS= 1000;
     private String API_Key;
     private String URLParam;
+    private int total;
 
-    public Yelp(String startApi_Key,HashMap<String, String> startURLParam){
+    public Yelp(String startApi_Key,HashMap<String, String> startURLParam) {
 
+        Log.d("STATE","Yelp created");
         this.API_Key = startApi_Key;
         setURLParam(startURLParam);
+        total();
 
     }
 
@@ -51,31 +55,39 @@ public class Yelp {
 
     }
 
-    public int total(){
+    private void total(){
         JSONObject call = new JSONObject();
 
+        Log.d("STATE","Before call me");
         try {
             call = call_me(1,0);
+            Log.d("STATE","Call me try");
         } catch (Exception e) {
             e.printStackTrace();
+            Log.d("STATE","Call me except: " + e.toString());
         }
+
 
         int total_num = 0;
         try {
             total_num = call.getInt("total");
+
         }catch (JSONException e){
+
         }
+
         if (total_num > MAX_BUSINESS){
             total_num = MAX_BUSINESS;
         }
 
 
-        return total_num;
+        this.total = total_num;
 
     }
 
+    public int getTotal(){return this.total;};
+
     public Business[] all(){
-        int total = total();
         if (total > MAX_BUSINESS){
             total = MAX_BUSINESS;
         }
@@ -118,12 +130,9 @@ public class Yelp {
     }
     // Change so instead of if the offset is close to the total, it reduces the size, change it so the offset accomoddates the maximum size
     public  Business[] get50(int offset){
-        int total = total();
-        if (total > 1000){
-            total = 1000;
-        }
-
+        Log.d("STATE","yelp get 50");
         int size = MAX_LIMIT;
+
         if (offset + 1 + MAX_LIMIT > total){
             size = total - (offset+1) + 1;
         }
@@ -133,7 +142,7 @@ public class Yelp {
         JSONArray bus_array = new JSONArray();
 
 
-
+        Log.d("STATE","call me");
         try {
             Response = call_me(size,offset);
         } catch (Exception e) {
@@ -144,10 +153,9 @@ public class Yelp {
             bus_array = Response.getJSONArray("businesses");
         }catch (JSONException e){
         }
-        System.out.println("\nYELP Api 50 Run: Offset: " + offset);
-
 
         for (int j = 0; j < bus_array.length(); j++) {
+
             JSONObject singleBus = null;
             try {
                 singleBus = bus_array.getJSONObject(j);
@@ -164,9 +172,15 @@ public class Yelp {
     private JSONObject call_me(int limit, int offset) throws Exception {
 
         String url = "https://api.yelp.com/v3/businesses/search?limit=" + limit + "&offset=" + offset + "&" + this.URLParam;
-        System.out.println(url);
+
+        Log.d("STATE","ran yelp: " + url);
+
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        Log.d("STATE","HTTP URL Connection");
+        Log.d("STATE","Con: " + con.toString());
+
+
 
         // optional default is GET
         con.setRequestMethod("GET");
@@ -178,9 +192,15 @@ public class Yelp {
         con.setRequestProperty("Content-Type", "text/plain");
         con.setRequestProperty("charset", "UTF-8");
 
+        Log.d("STATE","Con2: " + con.toString());
+
+        Log.d("STATE","Before Response code");
         int responseCode = con.getResponseCode();
+        Log.d("STATE","After Response code");
+        Log.d("STATE","Response code: " + responseCode);
 //        System.out.println("\nSending 'GET' request to URL : " + url);
 //        System.out.println("Response Code : " + responseCode);
+
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -197,6 +217,8 @@ public class Yelp {
         JSONObject myResponse = new JSONObject(response.toString());
 //        System.out.println("\nresult after Reading JSON Response");
 //        System.out.println("total- " + myResponse.getNumber("total"));
+
+        Log.d("STATE","End call me");
 
         return myResponse;
 

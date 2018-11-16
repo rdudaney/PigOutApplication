@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Application {
 
     public static void run(Yelp yelp, GoogleMaps google){
-        int total = yelp.total();
+        int total = yelp.getTotal();
         int slice = 20;
         Business[] bus_list = new Business[total];
         String toEnd = "";
