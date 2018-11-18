@@ -73,17 +73,38 @@ public class Running {
 
 
     public Business nextBus(){
+        Log.d("STATE","nextBus called");
+        Log.d("STATE","this.current + 1: " + (this.current+1));
+        Log.d("STATE","this.randomIntArray[this.current + 1]: " + this.randomIntArray[this.current + 1]);
+        Log.d("STATE","this.businessArray[this.randomIntArray[this.current + 1]]: " + this.businessArray[this.randomIntArray[this.current + 1]]);
+        String printString = "[";
+        for(int i = 0; i < this.businessArray.length;i++){
+            if(this.businessArray[i] == null){
+                printString += " null,";
+            }
+            else{
+                printString += " " + i + ",";
+            }
+        }
+        printString += "]";
+        Log.d("STATE","printString: " + printString);
+
+
+
         if(this.current + 1 >= this.total){
+            Log.d("STATE","nextBus called - END");
             return null;
         }
-        else if(this.businessArray[this.randomIntArray[this.current + 1]] != null) {
+        else if(this.businessArray[(this.randomIntArray[this.current + 1])] != null) {
+            Log.d("STATE","nextBus called - already there");
             this.current++;
             return businessArray[this.randomIntArray[this.current]];
         }else{
+            Log.d("STATE","nextBus called - NOT there");
             // for the current condition
-            if (this.current < 0){
-                this.current++;
-            }
+
+            this.current++;
+
             for (int j = this.current; j < this.current + SLICE; j++) {
                 if (j >= this.total){
                     break;
@@ -95,7 +116,8 @@ public class Running {
                     }
 
                     for (int k = 0; k < newBus.length;k++){
-                        this.businessArray[this.randomIntArray[j+k]] = newBus[k];
+                        this.businessArray[this.randomIntArray[j]+k] = newBus[k];
+                        Log.d("STATE","this.randomIntArray[j+k]: " + this.randomIntArray[j+k]);
                     }
                 }
             }

@@ -18,8 +18,10 @@ public class SecondActivity extends AppCompatActivity {
     private TextView BusinessName_Text;
     private TextView Address_Text;
     private TextView Rating_Text;
+    private TextView NumRating_Text;
     private TextView CurrentNum_Text;
     private TextView RandomNum_Text;
+    private TextView Price_Text;
     private Button nextBut;
     private Button prevBut;
     private HashMap<String, String> URLParam;
@@ -34,6 +36,8 @@ public class SecondActivity extends AppCompatActivity {
         this.BusinessName_Text = findViewById(R.id.businessName);
         this.Address_Text = findViewById(R.id.address);
         this.Rating_Text = findViewById(R.id.rating);
+        this.NumRating_Text = findViewById(R.id.numRating);
+        this.Price_Text = findViewById(R.id.price);
         this.RandomNum_Text = findViewById(R.id.randomNum);
         this.CurrentNum_Text = findViewById(R.id.currentNum);
 
@@ -96,6 +100,8 @@ public class SecondActivity extends AppCompatActivity {
         BusinessName_Text.setText(currentBus.getName());
         Address_Text.setText(currentBus.getAddress());
         Rating_Text.setText(String.format("%.1f", currentBus.getRating()));
+        NumRating_Text.setText(Integer.toString(currentBus.getReview_Count()));
+        Price_Text.setText(currentBus.getPrice());
         CurrentNum_Text.setText(currentRun.getCurrent() + " / " + currentRun.getTotal());
         RandomNum_Text.setText(currentRun.getRandom() + " / " + currentRun.getTotal());
 
