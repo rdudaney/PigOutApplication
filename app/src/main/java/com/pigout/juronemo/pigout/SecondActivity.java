@@ -1,11 +1,13 @@
 package com.pigout.juronemo.pigout;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import org.json.JSONObject;
 
@@ -25,6 +27,7 @@ public class SecondActivity extends AppCompatActivity {
     private Button nextBut;
     private Button prevBut;
     private HashMap<String, String> URLParam;
+    private ProgressBar progBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +43,14 @@ public class SecondActivity extends AppCompatActivity {
         this.Price_Text = findViewById(R.id.price);
         this.RandomNum_Text = findViewById(R.id.randomNum);
         this.CurrentNum_Text = findViewById(R.id.currentNum);
+        this.progBar = findViewById(R.id.progBar);
 
-        this.URLParam = new HashMap<>();
-        URLParam.put("term", "Food");
-        URLParam.put("location", "Woodland-Hills-CA");
-        URLParam.put("latitude", "");
-        URLParam.put("longitude", "");
-        URLParam.put("radius", "");
-        URLParam.put("categories", "");
-        URLParam.put("locale", "");
-//        URLParam.put("limit", "50");
-//        URLParam.put("offset", "50");
-        URLParam.put("sort_by", "");
-        URLParam.put("price", "");
-        URLParam.put("open_now", "");
-        URLParam.put("open_at", "");
-        URLParam.put("attributes", "");
+        Intent intent = getIntent();
+        URLParam = (HashMap<String, String>)intent.getSerializableExtra("URLParam");
+
+
+
+        hideViews();
 
         runTask newTask = new runTask();
         newTask.execute();
@@ -108,12 +103,41 @@ public class SecondActivity extends AppCompatActivity {
 
     }
 
+    public void hideViews(){
+        nextBut.setVisibility(View.GONE);
+        prevBut.setVisibility(View.GONE);
+        BusinessName_Text.setVisibility(View.GONE);
+        Address_Text.setVisibility(View.GONE);
+        Rating_Text.setVisibility(View.GONE);
+        NumRating_Text.setVisibility(View.GONE);
+        Price_Text.setVisibility(View.GONE);
+        CurrentNum_Text.setVisibility(View.GONE);
+        RandomNum_Text.setVisibility(View.GONE);
+    }
+
+    public void displayViews(){
+        nextBut.setVisibility(View.VISIBLE);
+        prevBut.setVisibility(View.VISIBLE);
+        BusinessName_Text.setVisibility(View.VISIBLE);
+        Address_Text.setVisibility(View.VISIBLE);
+        Rating_Text.setVisibility(View.VISIBLE);
+        NumRating_Text.setVisibility(View.VISIBLE);
+        Price_Text.setVisibility(View.VISIBLE);
+        CurrentNum_Text.setVisibility(View.VISIBLE);
+        RandomNum_Text.setVisibility(View.VISIBLE);
+    }
+
+
 
     private class runTask extends AsyncTask<Void, Void, Void> {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            hideViews();
+            progBar.setVisibility(View.VISIBLE);
+
         }
+
 
         @Override
         protected Void doInBackground(Void... voids) {
@@ -130,12 +154,15 @@ public class SecondActivity extends AppCompatActivity {
             displayCurrent();
 
             super.onPostExecute(aVoid);
+            displayViews();
+            progBar.setVisibility(View.GONE);
         }
 
         @Override
         protected void onProgressUpdate(Void... values) {
 
             super.onProgressUpdate(values);
+
         }
     }
 }
