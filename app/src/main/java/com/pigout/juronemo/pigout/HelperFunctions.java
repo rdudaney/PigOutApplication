@@ -8,13 +8,25 @@ import java.util.HashMap;
 public class HelperFunctions {
 
 
-    public static HashMap<String, String> formatParams(String loc, String dist, Boolean[] price){
+    public static HashMap<String, String> formatParams(String loc, String dist, Boolean[] price, double[] origin){
         HashMap<String, String> URLParam = new HashMap<>();
 
-        URLParam.put("term", "Food");
-        URLParam.put("location", formatLoc(loc)); //"Woodland-Hills-CA"
-        URLParam.put("latitude", "");
-        URLParam.put("longitude", "");
+        if(!loc.equals("")){
+            URLParam.put("location", formatLoc(loc)); //"Woodland-Hills-CA"
+            URLParam.put("latitude", "");
+            URLParam.put("longitude", "");
+        }else if (loc.equals("") && origin != null){
+            URLParam.put("location", ""); //"Woodland-Hills-CA"
+            URLParam.put("latitude", formatLat(origin));
+            URLParam.put("longitude", formatLong(origin));
+            Log.d("MAINVIEW", "Helper: " + formatLat(origin) + " , " + formatLong(origin));
+        }else{
+            Log.d("MAINVIEW", "Helper: NULL");
+        }
+
+
+
+        URLParam.put("term", "Restaurant");
         URLParam.put("radius", formatDist(dist));
         URLParam.put("categories", "");
         URLParam.put("locale", "");
@@ -29,6 +41,16 @@ public class HelperFunctions {
 
         return URLParam;
 
+    }
+    private  static String formatLong(double[] origin){
+
+        return Double.toString(origin[1]);
+
+    }
+
+    private  static String formatLat(double[] origin){
+
+        return Double.toString(origin[0]);
     }
 
     private static String formatLoc(String loc){

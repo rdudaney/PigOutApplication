@@ -85,10 +85,18 @@
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/price"/>
     <TextView
-            android:text="@string/currentNum_text"
+            android:text="TIME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/price"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:id="@+id/time"/>
+    <TextView
+            android:text="@string/currentNum_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/time"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:id="@+id/currentNum"/>
