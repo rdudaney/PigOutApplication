@@ -23,6 +23,7 @@ public class Business {
     private double longitude;
     private double[] coordinates;
     private double duration;
+    private String imageURL;
 
 
     public Business(JSONObject startObj){
@@ -32,6 +33,7 @@ public class Business {
             this.review_count = startObj.getInt("review_count");
             this.total_address = displayAddress(startObj.getJSONObject("location"));
             this.coordinates = setCoor(startObj.getJSONObject("coordinates"));
+            this.imageURL = startObj.getString("image_url");
         } catch(JSONException e){
         }
 
@@ -45,6 +47,7 @@ public class Business {
 
         this.latitude = this.coordinates[0];
         this.longitude = this.coordinates[1];
+
 
 
     }
@@ -89,6 +92,11 @@ public class Business {
     public double[] getCoordinates(){return this.coordinates;}
     public double getLatitude(){return this.latitude;}
     public double getLongitude(){return this.longitude;}
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
     public void setDuration(double startDur){
         this.duration = startDur;
     }

@@ -27,6 +27,14 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
 
 import java.util.HashMap;
+import java.util.Objects;
+//TODO: fix locationRequest returning null when first initialized
+// TODO: Add constraints (distance, minimum rating) and search Keyword
+// TODO: Display Category, phone number, website
+// TODO: Get Google Place rating
+// TODO: Add additional information when business is selected
+// TODO: Add Yelp Stars
+// TODO: Sort by rating?
 
 public class MainActivity extends AppCompatActivity {
 
@@ -117,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         // Register the listener with the Location Manager to receive location updates
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-            // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
@@ -174,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(10000);
         locationRequest.setFastestInterval(10000 / 2);
+
 
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
         builder.setAlwaysShow(true);

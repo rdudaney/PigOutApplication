@@ -39,6 +39,7 @@
     />
     <EditText
             android:id="@+id/location_edittext"
+            android:hint="Current Location"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="text"

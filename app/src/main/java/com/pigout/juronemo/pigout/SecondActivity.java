@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -27,6 +29,7 @@ public class SecondActivity extends AppCompatActivity {
     private TextView Price_Text;
     private Button nextBut;
     private Button prevBut;
+    private ImageView BusinessImage;
     private HashMap<String, String> URLParam;
     private ProgressBar progBar;
     private double[] Origin;
@@ -47,6 +50,7 @@ public class SecondActivity extends AppCompatActivity {
         this.RandomNum_Text = findViewById(R.id.randomNum);
         this.CurrentNum_Text = findViewById(R.id.currentNum);
         this.progBar = findViewById(R.id.progBar);
+        this.BusinessImage = findViewById(R.id.businessImage);
 
         Intent intent = getIntent();
         URLParam = (HashMap<String, String>)intent.getSerializableExtra("URLParam");
@@ -88,10 +92,24 @@ public class SecondActivity extends AppCompatActivity {
 
     public void prevButton(){
         currentBus = currentRun.prevBus();
-        displayCurrent();
+
+        Picasso.get()
+                .load(currentBus.getImageURL())
+                .into(BusinessImage, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        displayCurrent();
+                    }
+
+                    @Override
+                    public void onError(Exception ex) {
+
+                    }
+                });
     }
 
     public void displayCurrent() {
+
         if (currentRun.getCurrent() <= 0) {
             prevBut.setVisibility(View.GONE);
         } else if (currentRun.getCurrent() >= currentRun.getTotal()) {
@@ -129,6 +147,7 @@ public class SecondActivity extends AppCompatActivity {
         Price_Text.setVisibility(View.GONE);
         CurrentNum_Text.setVisibility(View.GONE);
         RandomNum_Text.setVisibility(View.GONE);
+        BusinessImage.setVisibility(View.GONE);
     }
 
     public void displayViews(){
@@ -142,6 +161,8 @@ public class SecondActivity extends AppCompatActivity {
         Price_Text.setVisibility(View.VISIBLE);
         CurrentNum_Text.setVisibility(View.VISIBLE);
         RandomNum_Text.setVisibility(View.VISIBLE);
+        BusinessImage.setVisibility(View.VISIBLE);
+
     }
 
 
@@ -163,15 +184,33 @@ public class SecondActivity extends AppCompatActivity {
             }
             currentBus = currentRun.nextBus();
 
+//            Picasso.get().load(currentBus.getImageURL()).fetch();
+//
+
+
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            displayCurrent();
-
             super.onPostExecute(aVoid);
-            displayViews();
+
+            //TODO Look for errors when there is no pictures or business to be shown
+            Picasso.get()
+                    .load(currentBus.getImageURL())
+                    .into(BusinessImage, new com.squareup.picasso.Callback() {
+                        @Override
+                        public void onSuccess() {
+                            displayCurrent();
+                            displayViews();
+                        }
+
+                        @Override
+                        public void onError(Exception ex) {
+
+                        }
+                    });
+
             progBar.setVisibility(View.GONE);
         }
 
