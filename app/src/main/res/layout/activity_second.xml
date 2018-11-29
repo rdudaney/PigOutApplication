@@ -46,80 +46,114 @@
             android:text="@string/businessName_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/businessImage"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="20sp"
+            app:layout_constraintVertical_bias="0.6"
             android:id="@+id/businessName"
-            android:gravity="center"/>
-    <TextView
-            android:text="@string/address_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/businessName"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/address"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlack"
+            android:layout_marginTop="10sp"/>
     <TextView
             android:text="@string/rating_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/address"
+            app:layout_constraintTop_toBottomOf="@id/randomNum"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:id="@+id/rating"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/businessName"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="20sp"
+            android:id="@+id/rating_linear">
+
+        <ImageView
+                android:text="@string/rating_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rating_image"
+                android:textColor="@color/colorGrey"
+                android:src="@drawable/stars_regular_0"/>
+
+        <TextView
+                android:text="NUMBER OF RATINGS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/numRating"
+                android:textColor="@color/colorGrey"
+                app:layout_constraintStart_toEndOf="@id/rating_image"
+                android:layout_marginLeft="10sp"/>
+
+
+    </LinearLayout>
+
+
     <TextView
-            android:text="NUMBER OF RATINGS"
+            android:text="@string/address_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/rating"
+            app:layout_constraintTop_toBottomOf="@id/rating_linear"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:id="@+id/numRating"
-            android:gravity="center"/>
+            android:layout_marginHorizontal="20sp"
+            android:id="@+id/address"
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
+
     <TextView
             android:text="PRICE"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/numRating"
+            app:layout_constraintTop_toBottomOf="@id/address"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:id="@+id/price"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
     <TextView
             android:text="TIME"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/price"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:id="@+id/time"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
     <TextView
             android:text="@string/currentNum_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/time"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:id="@+id/currentNum"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
     <TextView
             android:text="@string/randomNum_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/currentNum"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginHorizontal="20sp"
             android:id="@+id/randomNum"
-            android:gravity="center"/>
+            android:gravity="start"
+            android:textColor="@color/colorGrey"/>
 
     <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0sp"
             android:id="@+id/businessImage"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/businessName"
             android:contentDescription="Business Image"/>
 
 

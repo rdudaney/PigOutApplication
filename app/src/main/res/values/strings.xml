@@ -22,6 +22,7 @@
     <string name="businessName_text">BUSINESS NAME</string>
     <string name="address_text">ADDRESS</string>
     <string name="rating_text">RATING</string>
+    <string name="rating_image">RATING IMAGE</string>
     <string name="currentNum_text">CURRENT NUMBER</string>
     <string name="randomNum_text">RANDOM NUMBER</string>
 

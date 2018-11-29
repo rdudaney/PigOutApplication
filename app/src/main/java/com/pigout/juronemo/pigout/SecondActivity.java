@@ -22,6 +22,7 @@ public class SecondActivity extends AppCompatActivity {
     private TextView BusinessName_Text;
     private TextView Address_Text;
     private TextView Rating_Text;
+    private ImageView Rating_Image;
     private TextView NumRating_Text;
     private TextView Time_Text;
     private TextView CurrentNum_Text;
@@ -44,6 +45,7 @@ public class SecondActivity extends AppCompatActivity {
         this.BusinessName_Text = findViewById(R.id.businessName);
         this.Address_Text = findViewById(R.id.address);
         this.Rating_Text = findViewById(R.id.rating);
+        this.Rating_Image = findViewById(R.id.rating_image);
         this.NumRating_Text = findViewById(R.id.numRating);
         this.Time_Text = findViewById(R.id.time);
         this.Price_Text = findViewById(R.id.price);
@@ -92,20 +94,7 @@ public class SecondActivity extends AppCompatActivity {
 
     public void prevButton(){
         currentBus = currentRun.prevBus();
-
-        Picasso.get()
-                .load(currentBus.getImageURL())
-                .into(BusinessImage, new com.squareup.picasso.Callback() {
-                    @Override
-                    public void onSuccess() {
-                        displayCurrent();
-                    }
-
-                    @Override
-                    public void onError(Exception ex) {
-
-                    }
-                });
+        loadPic();
     }
 
     public void displayCurrent() {
@@ -119,19 +108,40 @@ public class SecondActivity extends AppCompatActivity {
             nextBut.setVisibility(View.VISIBLE);
         }
 
-        BusinessName_Text.setText("NAME: " + currentBus.getName());
-        Address_Text.setText("ADDRESS: " + currentBus.getAddress());
+//        BusinessName_Text.setText("NAME: " + currentBus.getName());
+//        Address_Text.setText("ADDRESS: " + currentBus.getAddress());
+//        Rating_Text.setText(String.format("RATING: %.1f", currentBus.getRating()));
+//        NumRating_Text.setText("# OF RATINGS: " + Integer.toString(currentBus.getReview_Count()));
+//        Price_Text.setText("PRICE: " + currentBus.getPrice());
+//        CurrentNum_Text.setText("NUM IN CURRENT: " +currentRun.getCurrent() + " / " + currentRun.getTotal());
+//        RandomNum_Text.setText("NUM IN RANDOM: " + currentRun.getRandom() + " / " + currentRun.getTotal());
+//
+//        if (currentBus.getDuration() == 0){
+//            Time_Text.setText("TIME: N/A");
+//        }else{
+//            Time_Text.setText("TIME: " + Long.toString(Math.round(currentBus.getDuration())) + " Minutes");
+//        }
+
+        BusinessName_Text.setText(currentBus.getName());
+        Address_Text.setText(currentBus.getAddress());
         Rating_Text.setText(String.format("RATING: %.1f", currentBus.getRating()));
-        NumRating_Text.setText("# OF RATINGS: " + Integer.toString(currentBus.getReview_Count()));
-        Price_Text.setText("PRICE: " + currentBus.getPrice());
+        NumRating_Text.setText(Integer.toString(currentBus.getReview_Count()) + " Reviews");
+        Price_Text.setText(currentBus.getPrice());
         CurrentNum_Text.setText("NUM IN CURRENT: " +currentRun.getCurrent() + " / " + currentRun.getTotal());
         RandomNum_Text.setText("NUM IN RANDOM: " + currentRun.getRandom() + " / " + currentRun.getTotal());
 
         if (currentBus.getDuration() == 0){
-            Time_Text.setText("TIME: N/A");
+            Time_Text.setText("N/A Minutes");
         }else{
-            Time_Text.setText("TIME: " + Long.toString(Math.round(currentBus.getDuration())) + " Minutes");
+            Time_Text.setText(Long.toString(Math.round(currentBus.getDuration())) + " Minutes");
         }
+
+        int YelpStars = (int)(currentBus.getRating()*10);
+        Log.d("YELPSTARS",Integer.toString(YelpStars));
+        String YelpStarsFilename = "stars_regular_" + YelpStars;
+        int YelpStarsID = getResources().getIdentifier(YelpStarsFilename, "drawable", getPackageName());
+        Rating_Image.setImageResource(YelpStarsID);
+
 
 
     }
@@ -142,6 +152,7 @@ public class SecondActivity extends AppCompatActivity {
         BusinessName_Text.setVisibility(View.GONE);
         Address_Text.setVisibility(View.GONE);
         Rating_Text.setVisibility(View.GONE);
+        Rating_Image.setVisibility(View.GONE);
         NumRating_Text.setVisibility(View.GONE);
         Time_Text.setVisibility(View.GONE);
         Price_Text.setVisibility(View.GONE);
@@ -156,12 +167,33 @@ public class SecondActivity extends AppCompatActivity {
         BusinessName_Text.setVisibility(View.VISIBLE);
         Address_Text.setVisibility(View.VISIBLE);
         Rating_Text.setVisibility(View.VISIBLE);
+        Rating_Image.setVisibility(View.VISIBLE);
         NumRating_Text.setVisibility(View.VISIBLE);
         Time_Text.setVisibility(View.VISIBLE);
         Price_Text.setVisibility(View.VISIBLE);
-        CurrentNum_Text.setVisibility(View.VISIBLE);
-        RandomNum_Text.setVisibility(View.VISIBLE);
+        //CurrentNum_Text.setVisibility(View.VISIBLE);
+        //RandomNum_Text.setVisibility(View.VISIBLE);
         BusinessImage.setVisibility(View.VISIBLE);
+
+    }
+
+    public void loadPic(){
+
+        //TODO Look for errors when there is no pictures or business to be shown
+        Picasso.get()
+                .load(currentBus.getImageURL())
+                .into(BusinessImage, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        displayCurrent();
+                        displayViews();
+                    }
+
+                    @Override
+                    public void onError(Exception ex) {
+
+                    }
+                });
 
     }
 
@@ -181,6 +213,8 @@ public class SecondActivity extends AppCompatActivity {
         protected Void doInBackground(Void... voids) {
             if (currentRun == null) {
                 currentRun = new Running(URLParam, Origin);
+
+
             }
             currentBus = currentRun.nextBus();
 
@@ -194,23 +228,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-
-            //TODO Look for errors when there is no pictures or business to be shown
-            Picasso.get()
-                    .load(currentBus.getImageURL())
-                    .into(BusinessImage, new com.squareup.picasso.Callback() {
-                        @Override
-                        public void onSuccess() {
-                            displayCurrent();
-                            displayViews();
-                        }
-
-                        @Override
-                        public void onError(Exception ex) {
-
-                        }
-                    });
-
+            loadPic();
             progBar.setVisibility(View.GONE);
         }
 

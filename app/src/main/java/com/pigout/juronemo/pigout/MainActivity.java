@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.*;
+//import com.google.android.gms.location.LocationListener;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -39,6 +40,7 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
 
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
+    private String locationVal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,41 +60,26 @@ public class MainActivity extends AppCompatActivity {
         ToggleButton price3_Button = findViewById(R.id.toggleButton3);
         ToggleButton price4_Button = findViewById(R.id.toggleButton4);
 
-        String locationVal = LocationText.getText().toString();
+        locationVal = LocationText.getText().toString();
         String distanceVal = DistanceText.getText().toString();
         Boolean[] priceVal = {price1_Button.isChecked(),price2_Button.isChecked(),price3_Button.isChecked(),price4_Button.isChecked()};
 
 
 
-
-
-        Log.d("MAINVIEW",Boolean.toString(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED));
-
-
-        LocationManager locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-        if (locationVal.equals("") && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            requestGPS();
-            displayLocationSettingsRequest(getApplicationContext());
-            return;
-        }
-
-        if ( locationVal.equals("") && !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
-            displayLocationSettingsRequest(getApplicationContext());
-            return;
-        }
-
         double[] origin = null;
         if (locationVal.equals("")){
             origin = getLoc();
-            Log.d("MAINVIEW",Double.toString(origin[0]) + " , " + Double.toString(origin[1]));
-//            Toast.makeText(this, Double.toString(origin[0]) + " , " + Double.toString(origin[1]), Toast.LENGTH_LONG).show();
-//            return;
+
+            if (origin == null){
+                return;
+            }
         }
 
-        HashMap<String,String> URLParam = HelperFunctions.formatParams(locationVal,distanceVal,priceVal, origin);
         Intent goSecondView = new Intent(this, SecondActivity.class);
+        HashMap<String,String> URLParam = HelperFunctions.formatParams(locationVal,distanceVal,priceVal, origin);
         goSecondView.putExtra("URLParam",URLParam);
+
+
         goSecondView.putExtra("Origin",origin);
 
         startActivity(goSecondView);
@@ -122,6 +109,18 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
+
+        if (locationVal.equals("") && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            requestGPS();
+            return null;
+        }
+
+        if ( locationVal.equals("") && !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+            displayLocationSettingsRequest(getApplicationContext());
+            return null;
+        }
+
         // Register the listener with the Location Manager to receive location updates
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -135,12 +134,28 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             return null;
         }
+
+        //locationManager.requestSingleUpdate(LocationManager.GPS_PROVIDER);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
         Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 
         if(lastKnownLocation == null){
-            Log.d("MAINVIEW","lastKnown location is null");
+            AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("No Location Found");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+            return null;
         }
+
+//        while (lastKnownLocation == null){
+//            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//        }
 
         double latitude = lastKnownLocation.getLatitude();
         double longitude = lastKnownLocation.getLongitude();
