@@ -18,6 +18,7 @@ public class Running {
     private int current;
     private Yelp yelp;
     private GoogleMaps google;
+    private GooglePlace google_place;
 
     public final static int SLICE = 1;
 
@@ -26,10 +27,12 @@ public class Running {
         this.Origin = startOrigin;
         this.current = -1;
 
-        String Yelp_key = "X65ClnpzUb1NxgVieFb2aYfgKhsT8ddyOaypzBKWjH7E6jaCS6mUINvbb2bMm1kp9YbzItxiKZj-SmM04X2PjrdggByvQa2H37L3fivtD-hH48tP5EqLh3pRf96iW3Yx";
-        String Google_key = "AIzaSyDULakzPzA_91C-EV9eLtYphqzqa0oIm3I";
+        String Yelp_key = "";
+        String Google_key = "";
+        String GooglePlace_key = "";
 
         this.yelp = new Yelp(Yelp_key,URLParam);
+        this.google_place = new GooglePlace(GooglePlace_key);
 
         if (startOrigin != null) {
             this.google = new GoogleMaps(Google_key, Origin);
@@ -40,8 +43,8 @@ public class Running {
         this.total = yelp.getTotal();
         this.businessArray = new Business[this.total];
         randomInts(this.total);
-        Log.d("STATE","Running created");
-        Log.d("STATE", Arrays.toString(randomIntArray));
+
+        Log.d("STATE", "randomIntArray: " + Arrays.toString(randomIntArray));
         Log.d("STATE","this.total: " + this.total);
 
     }
@@ -73,35 +76,25 @@ public class Running {
 
 
     public Business nextBus(){
-        Log.d("STATE","nextBus called");
-        Log.d("STATE","this.current + 1: " + (this.current+1));
-        Log.d("STATE","this.randomIntArray[this.current + 1]: " + this.randomIntArray[this.current + 1]);
-        Log.d("STATE","this.businessArray[this.randomIntArray[this.current + 1]]: " + this.businessArray[this.randomIntArray[this.current + 1]]);
-        String printString = "[";
-        for(int i = 0; i < this.businessArray.length;i++){
-            if(this.businessArray[i] == null){
-                printString += " null,";
-            }
-            else{
-                printString += " " + i + ",";
-            }
-        }
-        printString += "]";
-        Log.d("STATE","printString: " + printString);
-
-
 
         if(this.current + 1 >= this.total){
-            Log.d("STATE","nextBus called - END");
             return null;
         }
         else if(this.businessArray[(this.randomIntArray[this.current + 1])] != null) {
-            Log.d("STATE","nextBus called - already there");
             this.current++;
+
+            if(this.google != null && !this.businessArray[(this.randomIntArray[this.current])].getDurationBool())
+            {
+                this.google.singleTime(this.businessArray[(this.randomIntArray[this.current])]);
+            }
+
+            if(!this.businessArray[(this.randomIntArray[this.current])].getGooglePlaceBool()){
+                this.google_place.searchPlace(this.businessArray[(this.randomIntArray[this.current])]);
+            }
+
             return businessArray[this.randomIntArray[this.current]];
         }else{
-            Log.d("STATE","nextBus called - NOT there");
-            // for the current condition
+            // Business not already found
 
             this.current++;
 
@@ -111,14 +104,17 @@ public class Running {
                 }else if ((this.businessArray[this.randomIntArray[j]] == null)) {
                     Business[] newBus = yelp.get50(this.randomIntArray[j]);
 
+                    google_place.searchPlace(newBus[0]);
+
                     if (this.google != null) {
-                        this.google.time_all(newBus);
+                        this.google.singleTime(newBus[0]);
                     }
 
                     for (int k = 0; k < newBus.length;k++){
                         this.businessArray[this.randomIntArray[j]+k] = newBus[k];
-                        Log.d("STATE","this.randomIntArray[j+k]: " + this.randomIntArray[j+k]);
                     }
+
+
                 }
             }
             return businessArray[this.randomIntArray[this.current]];

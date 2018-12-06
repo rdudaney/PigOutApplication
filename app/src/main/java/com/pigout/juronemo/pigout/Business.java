@@ -1,5 +1,6 @@
 package com.pigout.juronemo.pigout;
 
+import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +15,7 @@ public class Business {
 //    private String address_string;
 //    private int numRating;
 
+//    private String id;
     private String name;
     private double rating;
     private String price;
@@ -24,6 +26,11 @@ public class Business {
     private double[] coordinates;
     private double duration;
     private String imageURL;
+    private double distance;
+    private String type;
+    private Boolean durationBool;
+    private double googleRating;
+    private Boolean googlePlaceBool;
 
 
     public Business(JSONObject startObj){
@@ -34,6 +41,9 @@ public class Business {
             this.total_address = displayAddress(startObj.getJSONObject("location"));
             this.coordinates = setCoor(startObj.getJSONObject("coordinates"));
             this.imageURL = startObj.getString("image_url");
+            this.distance = startObj.getDouble("distance");
+            this.type = startObj.getJSONArray("categories").getJSONObject(0).getString("title");
+
         } catch(JSONException e){
         }
 
@@ -44,9 +54,11 @@ public class Business {
             this.price = "N/A";
         }
 
-
+        this.durationBool = false;
+        this.googlePlaceBool = false;
         this.latitude = this.coordinates[0];
         this.longitude = this.coordinates[1];
+
 
 
 
@@ -90,8 +102,10 @@ public class Business {
     public int getReview_Count(){return this.review_count;}
     public String getAddress(){return this.total_address;}
     public double[] getCoordinates(){return this.coordinates;}
+    public double getDistance(){return this.distance/1609.34;}
     public double getLatitude(){return this.latitude;}
     public double getLongitude(){return this.longitude;}
+    public String getType(){return this.type;}
 
     public String getImageURL() {
         return imageURL;
@@ -99,8 +113,19 @@ public class Business {
 
     public void setDuration(double startDur){
         this.duration = startDur;
+        this.durationBool = true;
     }
     public double getDuration(){return this.duration;}
+    public Boolean getDurationBool(){return this.durationBool;}
+
+    public void setGoogleRating(double startGoogleRating){
+        this.googleRating = startGoogleRating;
+        this.googlePlaceBool = true;
+    }
+
+    public Boolean getGooglePlaceBool(){return this.googlePlaceBool;}
+
+    public double getGoogleRating(){return this.googleRating;}
 
     public String toString(){
 //        return("Name: " + this.name + "\nRating: " + this.rating + "\nPrice: " + this.price + "\nAddress: " + this.address_string + "\n");

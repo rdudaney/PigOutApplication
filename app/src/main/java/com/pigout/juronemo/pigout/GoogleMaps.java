@@ -1,5 +1,6 @@
 package com.pigout.juronemo.pigout;
 
+import android.util.Log;
 import com.pigout.juronemo.pigout.Business;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +25,29 @@ public class GoogleMaps {
 
     public void setOrigin(double[] startOrigin){
         this.origin = startOrigin;
+    }
+
+    public void singleTime(Business dest){
+        JSONObject Response = new JSONObject();
+        try {
+            Response = call_me(setup_single(dest));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JSONObject rows = null;
+        try {
+            rows = Response.getJSONArray("rows").getJSONObject(0);
+            JSONObject element = rows.getJSONArray("elements").getJSONObject(0);
+            //                System.out.println(element);
+            JSONObject duration = element.getJSONObject("duration_in_traffic");
+            //                System.out.println(duration);
+            dest.setDuration(duration.getInt("value")/60.0);
+        } catch (Exception e) {
+            dest.setDuration(-1);
+
+        }
+
+
     }
 
     public void time_all(Business[] dest){
@@ -95,10 +119,19 @@ public class GoogleMaps {
         return url;
     }
 
+    private String setup_single(Business dest){
+//        String URL_attach = "origins="+origin[0]+","+origin[1]+"&destinations="+dest[0]+"%2C"+dest[1];
+        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&departure_time=now" + "&key=" + this.API_Key +"&";
+        url += "origins="+this.origin[0]+","+this.origin[1]+"&destinations=" + dest.getCoordinates()[0] + "%2C" + dest.getCoordinates()[1];
+
+        return url;
+    }
+
     private JSONObject call_me(String url) throws Exception {
 
 //        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&departure_time=now" + "&key=" + this.API_Key +"&" + URL_attach ;
         URL obj = new URL(url);
+
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
         // optional default is GET
@@ -112,6 +145,7 @@ public class GoogleMaps {
         con.setRequestProperty("charset", "UTF-8");
 
         int responseCode = con.getResponseCode();
+
 //        System.out.println("\nSending 'GET' request to URL : " + url);
 //        System.out.println("Response Code : " + responseCode);
         BufferedReader in = new BufferedReader(
@@ -130,6 +164,10 @@ public class GoogleMaps {
         JSONObject myResponse = new JSONObject(response.toString());
 //        System.out.println("\nresult after Reading JSON Response");
 //        System.out.println("total- " + myResponse.getNumber("total"));
+
+        Log.d("STATE","Google URL: " + url);
+        Log.d("STATE","Google Response Code: " + responseCode);
+        Log.d("STATE","Google Response: " + response);
 
         return myResponse;
 

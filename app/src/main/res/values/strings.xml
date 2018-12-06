@@ -25,6 +25,8 @@
     <string name="rating_image">RATING IMAGE</string>
     <string name="currentNum_text">CURRENT NUMBER</string>
     <string name="randomNum_text">RANDOM NUMBER</string>
+    <string name="distance_text">DISTANCE</string>
+    <string name="type_text">TYPE</string>
 
 
 </resources>

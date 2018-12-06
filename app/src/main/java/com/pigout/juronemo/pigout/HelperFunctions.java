@@ -8,7 +8,7 @@ import java.util.HashMap;
 public class HelperFunctions {
 
 
-    public static HashMap<String, String> formatParams(String loc, String dist, Boolean[] price, double[] origin){
+    public static HashMap<String, String> formatParams(String loc, String dist, boolean[] price, double[] origin){
         HashMap<String, String> URLParam = new HashMap<>();
 
         if(!loc.equals("")){
@@ -89,7 +89,7 @@ public class HelperFunctions {
         return dist;
     }
 
-    private static String formatPrices(Boolean[] prices){
+    private static String formatPrices(boolean[] prices){
         String returnString ="";
 
         for(int i = 0; i < prices.length;i++){

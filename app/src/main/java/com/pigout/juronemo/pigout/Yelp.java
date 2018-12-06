@@ -22,7 +22,6 @@ public class Yelp {
 
     public Yelp(String startApi_Key,HashMap<String, String> startURLParam) {
 
-        Log.d("STATE","Yelp created");
         this.API_Key = startApi_Key;
         setURLParam(startURLParam);
         total();
@@ -58,13 +57,10 @@ public class Yelp {
     private void total(){
         JSONObject call = new JSONObject();
 
-        Log.d("STATE","Before call me");
         try {
             call = call_me(1,0);
-            Log.d("STATE","Call me try");
         } catch (Exception e) {
             e.printStackTrace();
-            Log.d("STATE","Call me except: " + e.toString());
         }
 
 
@@ -130,8 +126,6 @@ public class Yelp {
     }
     // Change so instead of if the offset is close to the total, it reduces the size, change it so the offset accomoddates the maximum size
     public  Business[] get50(int offset){
-        Log.d("STATE","NewCall50");
-        Log.d("STATE","yelp get 50");
         int size = MAX_LIMIT;
 
         if (offset + 1 + MAX_LIMIT > total){
@@ -143,7 +137,6 @@ public class Yelp {
         JSONArray bus_array = new JSONArray();
 
 
-        Log.d("STATE","call me");
         try {
             Response = call_me(size,offset);
         } catch (Exception e) {
@@ -174,7 +167,6 @@ public class Yelp {
 
         String url = "https://api.yelp.com/v3/businesses/search?limit=" + limit + "&offset=" + offset + "&" + this.URLParam;
 
-        Log.d("STATE","ran yelp: " + url);
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -195,12 +187,9 @@ public class Yelp {
 
         //Log.d("STATE","Con2: " + con.toString());
 
-        Log.d("STATE","Before Response code");
-        int responseCode = con.getResponseCode();
-        Log.d("STATE","After Response code");
-        Log.d("STATE","Response code: " + responseCode);
 
-        Log.d("STATE","NewCall");
+        int responseCode = con.getResponseCode();
+        Log.d("STATE","Google Response Code: " + responseCode);
 //        System.out.println("\nSending 'GET' request to URL : " + url);
 //        System.out.println("Response Code : " + responseCode);
 
@@ -221,7 +210,10 @@ public class Yelp {
 //        System.out.println("\nresult after Reading JSON Response");
 //        System.out.println("total- " + myResponse.getNumber("total"));
 
-        Log.d("STATE","End call me");
+        Log.d("STATE","Yelp URL: " + url);
+        Log.d("STATE","Yelp Response Code: " + responseCode);
+        Log.d("STATE","Yelp Response: " + response);
+
 
         return myResponse;
 

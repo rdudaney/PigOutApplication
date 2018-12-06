@@ -15,6 +15,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -29,42 +30,60 @@ import com.google.android.gms.location.*;
 
 import java.util.HashMap;
 import java.util.Objects;
-//TODO: fix locationRequest returning null when first initialized
+// TODO: Save filter instance state
+// TODO: Change distance from Yelp to Google
+// TODO: fix locationRequest returning null when first initialized
 // TODO: Add constraints (distance, minimum rating) and search Keyword
 // TODO: Display Category, phone number, website
 // TODO: Get Google Place rating
 // TODO: Add additional information when business is selected
-// TODO: Add Yelp Stars
 // TODO: Sort by rating?
+// TODO: Add location from wifi, automatically see if location updated
+// TODO: Make Address clickable to Google maps, and Yelp link to yelp
+// TODO: Wrapper class that only contains Business, GoogleMaps, YelpPLace, and GooglePLace
 
 public class MainActivity extends AppCompatActivity {
 
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
-    private String locationVal;
+    private String locationVal = "";
+    private String distanceVal = "";
+    private boolean[] priceVal = {false,false,false,false};
+    private static final int FILTER_INTEGER_VALUE = 593;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
+
 
 
     }
 
+
+    public void filter_Click(View view){
+        Intent i = new Intent(this,FilterActivity.class);
+        startActivityForResult(i, FILTER_INTEGER_VALUE);
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (FILTER_INTEGER_VALUE) : {
+                locationVal = data.getStringExtra("Location");
+                distanceVal = data.getStringExtra("Distance");
+                priceVal = data.getBooleanArrayExtra("Price");
+
+                break;
+            }
+        }
+    }
+
     public void start_Click(View view){
-        EditText LocationText = findViewById(R.id.location_edittext);
-        EditText DistanceText = findViewById(R.id.distance_edittext);
-
-        ToggleButton price1_Button = findViewById(R.id.toggleButton1);
-        ToggleButton price2_Button = findViewById(R.id.toggleButton2);
-        ToggleButton price3_Button = findViewById(R.id.toggleButton3);
-        ToggleButton price4_Button = findViewById(R.id.toggleButton4);
-
-        locationVal = LocationText.getText().toString();
-        String distanceVal = DistanceText.getText().toString();
-        Boolean[] priceVal = {price1_Button.isChecked(),price2_Button.isChecked(),price3_Button.isChecked(),price4_Button.isChecked()};
-
-
 
         double[] origin = null;
         if (locationVal.equals("")){
@@ -208,21 +227,21 @@ public class MainActivity extends AppCompatActivity {
                 final Status status = result.getStatus();
                 switch (status.getStatusCode()) {
                     case LocationSettingsStatusCodes.SUCCESS:
-                        Log.d("MAINVIEW", "All location settings are satisfied.");
+                        //Log.d("MAINVIEW", "All location settings are satisfied.");
                         break;
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        Log.d("MAINVIEW", "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
+                        //Log.d("MAINVIEW", "Location settings are not satisfied. Show the user a dialog to upgrade location settings ");
 
                         try {
                             // Show the dialog by calling startResolutionForResult(), and check the result
                             // in onActivityResult().
                             status.startResolutionForResult(MainActivity.this, REQUEST_CHECK_SETTINGS);
                         } catch (IntentSender.SendIntentException e) {
-                            Log.d("MAINVIEW", "PendingIntent unable to execute request.");
+                            //Log.d("MAINVIEW", "PendingIntent unable to execute request.");
                         }
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        Log.d("MAINVIEW", "Location settings are inadequate, and cannot be fixed here. Dialog not created.");
+                        //Log.d("MAINVIEW", "Location settings are inadequate, and cannot be fixed here. Dialog not created.");
                         break;
                 }
             }
