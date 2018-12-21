@@ -10,6 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.wifi.WifiConfiguration;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,6 +31,7 @@ import com.google.android.gms.location.*;
 
 import java.util.HashMap;
 import java.util.Objects;
+// TODO: GooglePlace Details or YelpDetails (Google may return up to 10 photos)
 // TODO: Save filter instance state
 // TODO: Change distance from Yelp to Google
 // TODO: fix locationRequest returning null when first initialized
@@ -41,6 +43,7 @@ import java.util.Objects;
 // TODO: Add location from wifi, automatically see if location updated
 // TODO: Make Address clickable to Google maps, and Yelp link to yelp
 // TODO: Wrapper class that only contains Business, GoogleMaps, YelpPLace, and GooglePLace
+// TODO: If next Bus is not null, do not use ASyncTask
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,9 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     public void filter_Click(View view){
         Intent i = new Intent(this,FilterActivity.class);
+
+        i.putExtra("Location",locationVal);
+        i.putExtra("Distance",distanceVal);
+        i.putExtra("Price",priceVal);
         startActivityForResult(i, FILTER_INTEGER_VALUE);
 
     }
@@ -74,9 +80,16 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch(requestCode) {
             case (FILTER_INTEGER_VALUE) : {
-                locationVal = data.getStringExtra("Location");
-                distanceVal = data.getStringExtra("Distance");
-                priceVal = data.getBooleanArrayExtra("Price");
+
+                Log.d("STATE","MAIN onActivityResult ResultCode: " + resultCode);
+
+                if(resultCode == RESULT_OK) {
+                    locationVal = data.getStringExtra("Location");
+                    distanceVal = data.getStringExtra("Distance");
+                    priceVal = data.getBooleanArrayExtra("Price");
+
+                    Log.d("STATE","MAIN onActivityResult LOCATION: " + locationVal);
+                }
 
                 break;
             }

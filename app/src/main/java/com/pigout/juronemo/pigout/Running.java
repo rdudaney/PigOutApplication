@@ -17,8 +17,9 @@ public class Running {
     private double[] Origin;
     private int current;
     private Yelp yelp;
-    private GoogleMaps google;
-    private GooglePlace google_place;
+    private YelpDetails yelpDetails;
+    private GoogleMaps googleMaps;
+    private GooglePlace googlePlace;
 
     public final static int SLICE = 1;
 
@@ -27,17 +28,18 @@ public class Running {
         this.Origin = startOrigin;
         this.current = -1;
 
-        String Yelp_key = "";
-        String Google_key = "";
-        String GooglePlace_key = "";
+        String Yelp_key = "pG_pwQY1r_ignzPv3SKAmz6Ip9AVO7HcXdoDghDjRJZrL236pAMmCc4NAhv6OfgUBci0WGwlK3RoA1M2HxBs-RZUbqO_OfZBsalIiqdO2ezlDyK3VrFbXkixChcGXHYx";
+        String Google_key = "AIzaSyBIolQrPxm9ZOFYSje8ExlmRnGJlj9sdz4";
+        String GooglePlace_key = "AIzaSyBIolQrPxm9ZOFYSje8ExlmRnGJlj9sdz4";
 
         this.yelp = new Yelp(Yelp_key,URLParam);
-        this.google_place = new GooglePlace(GooglePlace_key);
+        this.googlePlace = new GooglePlace(GooglePlace_key);
+        this.yelpDetails = new YelpDetails(Yelp_key);
 
         if (startOrigin != null) {
-            this.google = new GoogleMaps(Google_key, Origin);
+            this.googleMaps = new GoogleMaps(Google_key, Origin);
         }else{
-            this.google = null;
+            this.googleMaps = null;
         }
 
         this.total = yelp.getTotal();
@@ -73,8 +75,6 @@ public class Running {
     public int getRandom(){return this.randomIntArray[this.current];}
 
 
-
-
     public Business nextBus(){
 
         if(this.current + 1 >= this.total){
@@ -83,14 +83,16 @@ public class Running {
         else if(this.businessArray[(this.randomIntArray[this.current + 1])] != null) {
             this.current++;
 
-            if(this.google != null && !this.businessArray[(this.randomIntArray[this.current])].getDurationBool())
+            if(this.googleMaps != null && !this.businessArray[(this.randomIntArray[this.current])].getDurationBool())
             {
-                this.google.singleTime(this.businessArray[(this.randomIntArray[this.current])]);
+                this.googleMaps.getData(this.businessArray[(this.randomIntArray[this.current])]);
             }
 
             if(!this.businessArray[(this.randomIntArray[this.current])].getGooglePlaceBool()){
-                this.google_place.searchPlace(this.businessArray[(this.randomIntArray[this.current])]);
+                this.googlePlace.getData(this.businessArray[(this.randomIntArray[this.current])]);
             }
+
+
 
             return businessArray[this.randomIntArray[this.current]];
         }else{
@@ -104,11 +106,13 @@ public class Running {
                 }else if ((this.businessArray[this.randomIntArray[j]] == null)) {
                     Business[] newBus = yelp.get50(this.randomIntArray[j]);
 
-                    google_place.searchPlace(newBus[0]);
+                    googlePlace.getData(newBus[0]);
 
-                    if (this.google != null) {
-                        this.google.singleTime(newBus[0]);
+                    if (this.googleMaps != null) {
+                        this.googleMaps.getData(newBus[0]);
                     }
+
+                    //this.yelpDetails.addInfo(newBus[0]); // TODO REMOVE THIS, ONLY FOR TEST
 
                     for (int k = 0; k < newBus.length;k++){
                         this.businessArray[this.randomIntArray[j]+k] = newBus[k];
@@ -131,6 +135,10 @@ public class Running {
         }else {
             return null;
         }
+    }
+
+    public Business peekBus(){
+        return this.businessArray[this.randomIntArray[this.current+1]];
     }
 
 }

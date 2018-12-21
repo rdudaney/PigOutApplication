@@ -28,7 +28,7 @@ public class Yelp {
 
     }
 
-    public void setURLParam(HashMap<String, String> startURLParam){
+    private void setURLParam(HashMap<String, String> startURLParam){
 
         String URLParam_string = "";
         String key;
@@ -55,10 +55,11 @@ public class Yelp {
     }
 
     private void total(){
+
         JSONObject call = new JSONObject();
 
         try {
-            call = call_me(1,0);
+            call = HelperFunctions.urlGetRequest(setupURL(1,0),this.API_Key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -80,51 +81,9 @@ public class Yelp {
         this.total = total_num;
 
     }
-
     public int getTotal(){return this.total;};
 
-    public Business[] all(){
-        if (total > MAX_BUSINESS){
-            total = MAX_BUSINESS;
-        }
-
-        Business[] business_list = new Business[total];
-        JSONObject Response = new JSONObject();
-        JSONArray bus_array = new JSONArray();
-
-
-
-        for(int i = 0; i < total; i+=50){
-            try {
-                Response = call_me(MAX_LIMIT,i);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            try {
-                bus_array = Response.getJSONArray("businesses");
-            }catch (JSONException e){
-            }
-
-            System.out.println("\nYELP Api Run: " + (i/MAX_LIMIT+1) + " Out of: " + (total/MAX_LIMIT));
-
-
-            for (int j = 0; j < bus_array.length(); j++) {
-                JSONObject singleBus = null;
-                try {
-                    singleBus = bus_array.getJSONObject(j);
-                }catch (JSONException e){
-                }
-                if ((i+j) < total){
-                    business_list[i+j] = new Business(singleBus);
-                }
-            }
-
-        }
-
-        return business_list;
-    }
-    // Change so instead of if the offset is close to the total, it reduces the size, change it so the offset accomoddates the maximum size
+    // TODO: Change so instead of if the offset is close to the total, it reduces the size, change it so the offset accomoddates the maximum size
     public  Business[] get50(int offset){
         int size = MAX_LIMIT;
 
@@ -138,7 +97,7 @@ public class Yelp {
 
 
         try {
-            Response = call_me(size,offset);
+            Response = HelperFunctions.urlGetRequest(setupURL(size,offset),this.API_Key);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,59 +122,11 @@ public class Yelp {
         return business_list;
     }
 
-    private JSONObject call_me(int limit, int offset) throws Exception {
-
+    private String setupURL(int limit, int offset){
         String url = "https://api.yelp.com/v3/businesses/search?limit=" + limit + "&offset=" + offset + "&" + this.URLParam;
 
-
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        //Log.d("STATE","HTTP URL Connection");
-        //Log.d("STATE","Con: " + con.toString());
-
-
-
-        // optional default is GET
-        con.setRequestMethod("GET");
-
-        //add request header
-        con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        con.setRequestProperty("Authorization", "Bearer " + this.API_Key);
-        con.setRequestProperty("Accept", "application/json");
-        con.setRequestProperty("Content-Type", "text/plain");
-        con.setRequestProperty("charset", "UTF-8");
-
-        //Log.d("STATE","Con2: " + con.toString());
-
-
-        int responseCode = con.getResponseCode();
-        Log.d("STATE","Google Response Code: " + responseCode);
-//        System.out.println("\nSending 'GET' request to URL : " + url);
-//        System.out.println("Response Code : " + responseCode);
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-
-        //print in String
-//        System.out.println(response.toString());
-
-        //Read JSON response and print
-        JSONObject myResponse = new JSONObject(response.toString());
-//        System.out.println("\nresult after Reading JSON Response");
-//        System.out.println("total- " + myResponse.getNumber("total"));
-
-        Log.d("STATE","Yelp URL: " + url);
-        Log.d("STATE","Yelp Response Code: " + responseCode);
-        Log.d("STATE","Yelp Response: " + response);
-
-
-        return myResponse;
+        return url;
 
     }
+
 }

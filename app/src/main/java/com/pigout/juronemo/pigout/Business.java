@@ -31,6 +31,7 @@ public class Business {
     private Boolean durationBool;
     private double googleRating;
     private Boolean googlePlaceBool;
+    private String id;
 
 
     public Business(JSONObject startObj){
@@ -43,6 +44,7 @@ public class Business {
             this.imageURL = startObj.getString("image_url");
             this.distance = startObj.getDouble("distance");
             this.type = startObj.getJSONArray("categories").getJSONObject(0).getString("title");
+            this.id = startObj.getString("id");
 
         } catch(JSONException e){
         }
@@ -84,6 +86,8 @@ public class Business {
         return address_string;
     }
 
+
+    // Yelp functions
     private double[] setCoor(JSONObject coor){
         double[] coordinates = new double[2];
 
@@ -106,11 +110,27 @@ public class Business {
     public double getLatitude(){return this.latitude;}
     public double getLongitude(){return this.longitude;}
     public String getType(){return this.type;}
-
     public String getImageURL() {
         return imageURL;
     }
+    public String getId(){return this.id;}
 
+
+    // Google Maps functions
+    public void setGoogleMaps(JSONObject Response){
+
+        JSONObject rows;
+        try {
+            rows = Response.getJSONArray("rows").getJSONObject(0);
+            JSONObject element = rows.getJSONArray("elements").getJSONObject(0);
+            JSONObject duration = element.getJSONObject("duration_in_traffic");
+            this.duration = duration.getInt("value")/60.0;
+        } catch (Exception e) {
+            this.duration = -1;
+
+        }
+        this.durationBool = true;
+    }
     public void setDuration(double startDur){
         this.duration = startDur;
         this.durationBool = true;
@@ -118,29 +138,31 @@ public class Business {
     public double getDuration(){return this.duration;}
     public Boolean getDurationBool(){return this.durationBool;}
 
+    // Google Place functions
+    public void setGooglePlace(JSONObject Response){
+        double rating = -1;
+        String status = "";
+        try {
+            rating = Response.getJSONArray("candidates").getJSONObject(0).getDouble("rating");
+            status = Response.getString("status");
+        }catch (Exception e){
+        }
+
+        if(!status.equals("OK")){
+            rating = -1;
+        }
+
+        this.googleRating = rating;
+        this.googlePlaceBool = true;
+
+    }
     public void setGoogleRating(double startGoogleRating){
         this.googleRating = startGoogleRating;
         this.googlePlaceBool = true;
     }
-
     public Boolean getGooglePlaceBool(){return this.googlePlaceBool;}
-
     public double getGoogleRating(){return this.googleRating;}
 
-    public String toString(){
-//        return("Name: " + this.name + "\nRating: " + this.rating + "\nPrice: " + this.price + "\nAddress: " + this.address_string + "\n");
-        String name_print = "Name: " + this.name;
-        String rating_print = String.format("Rating: %.1f", this.rating);
-        String NumRating_print = "Review #: " + this.review_count;
-        String price_print = "Price: " + this.price;
-        String address_print = "Address: " + this.total_address;
-        String lat_print = String.format("Latitude: %f", this.latitude);
-        String long_print = String.format("Longitude: %f", this.longitude);
-        String coor_print = String.format("Coordinates: (%f,%f)", this.latitude, this.longitude);
-        String dur_print = String.format("%-3.0f minutes", this.duration);
-
-        return(String.format("%-60s %-20s %-20s %-20s %-100s %-50s %-50s", name_print, rating_print, NumRating_print, price_print, address_print,coor_print,dur_print));
-    }
 
 
 }

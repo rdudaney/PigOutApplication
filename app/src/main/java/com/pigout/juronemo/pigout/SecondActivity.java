@@ -101,9 +101,15 @@ public class SecondActivity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
 
-        }else{
+         // haven't yet got the next Business, run ASyncTask
+        }else if (currentRun.peekBus() == null){
             runTask newTask = new runTask();
             newTask.execute();
+
+         //have got next Business, don't run ASyncTask
+        }else{
+            currentBus = currentRun.nextBus();
+            loadAll();
         }
 
     }
@@ -276,8 +282,6 @@ public class SecondActivity extends AppCompatActivity {
 
 
     }
-
-
 
     private class runTask extends AsyncTask<Void, Void, Void> {
         @Override

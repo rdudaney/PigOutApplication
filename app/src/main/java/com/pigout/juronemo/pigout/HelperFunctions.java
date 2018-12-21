@@ -1,7 +1,12 @@
 package com.pigout.juronemo.pigout;
 
 import android.util.Log;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -42,17 +47,55 @@ public class HelperFunctions {
         return URLParam;
 
     }
+
+    public static JSONObject urlGetRequest(String url, String API_Key) throws Exception {
+
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+        // optional default is GET
+        con.setRequestMethod("GET");
+
+        //add request header
+        con.setRequestProperty("User-Agent", "Mozilla/5.0");
+        con.setRequestProperty("Authorization", "Bearer " + API_Key);
+        con.setRequestProperty("Accept", "application/json");
+        con.setRequestProperty("Content-Type", "text/plain");
+        con.setRequestProperty("charset", "UTF-8");
+
+        int responseCode = con.getResponseCode();
+
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+
+        //Read JSON response and print
+        JSONObject myResponse = new JSONObject(response.toString());
+
+        Log.i("STATE","URL: " + url);
+        Log.i("STATE","Response Code: " + responseCode);
+        Log.i("STATE","Response: " + response);
+
+        return myResponse;
+
+    }
+
+
     private  static String formatLong(double[] origin){
 
         return Double.toString(origin[1]);
 
     }
-
     private  static String formatLat(double[] origin){
 
         return Double.toString(origin[0]);
     }
-
     private static String formatLoc(String loc){
 
         if(loc != null && !loc.equals("")){
@@ -74,7 +117,6 @@ public class HelperFunctions {
         Log.d("URLParam Func","Location String: " + loc);
         return loc;
     }
-
     private static String formatDist(String dist){
         double convert = 1609.34; // meters to mile
 
@@ -88,7 +130,6 @@ public class HelperFunctions {
 
         return dist;
     }
-
     private static String formatPrices(boolean[] prices){
         String returnString ="";
 
