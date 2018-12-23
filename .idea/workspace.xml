@@ -20,8 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="060ff883-c7b3-44ce-8d59-1e638e8617b7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/APICall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/YelpDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.2/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.2/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.2/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.2/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.2/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.2/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -30,16 +28,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.10.2/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.2/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Business.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Business.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/FilterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/FilterActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GoogleMaps.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GoogleMaps.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GooglePlace.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GooglePlace.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/HelperFunctions.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/HelperFunctions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Yelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Yelp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_filter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_filter.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,15 +63,15 @@
     <session id="1878739453">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="31" />
+          <entry key="project.closed" value="34" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.2" value="7" />
           <entry key="project.open.time.3" value="3" />
           <entry key="project.open.time.5" value="5" />
-          <entry key="project.open.time.6" value="5" />
-          <entry key="project.open.time.7" value="9" />
+          <entry key="project.open.time.6" value="7" />
+          <entry key="project.open.time.7" value="10" />
           <entry key="project.open.time.8" value="1" />
-          <entry key="project.opened" value="32" />
+          <entry key="project.opened" value="35" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -101,7 +91,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="27" />
-          <entry key="java" value="16011" />
+          <entry key="java" value="16058" />
           <entry key="txt" value="18" />
           <entry key="xml" value="3062" />
         </counts>
@@ -109,7 +99,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="27" />
-          <entry key="JAVA" value="16011" />
+          <entry key="JAVA" value="16058" />
           <entry key="PLAIN_TEXT" value="18" />
           <entry key="XML" value="3062" />
         </counts>
@@ -121,11 +111,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="96" column="28" selection-start-line="96" selection-start-column="28" selection-end-line="96" selection-end-column="28" />
+            <state relative-caret-position="452">
+              <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
               <folding>
                 <element signature="method#onCreate#0;class#SecondActivity#0" />
-                <element signature="method#nextButton#0;class#SecondActivity#0" />
                 <element signature="method#prevButton#0;class#SecondActivity#0" />
                 <element signature="method#loadText#0;class#SecondActivity#0" />
                 <element signature="method#hideViews#0;class#SecondActivity#0" />
@@ -137,16 +126,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="139" selection-start-line="139" selection-end-line="139" />
+            <state relative-caret-position="391">
+              <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#Running#0;class#Running#0" />
                 <element signature="method#randomInts#0;class#Running#0" />
-                <element signature="method#nextBus#0;class#Running#0" />
                 <element signature="method#prevBus#0;class#Running#0" />
               </folding>
             </state>
@@ -183,12 +170,12 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_second.xml">
           <provider selected="true" editor-type-id="android-designer2" />
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="218" column="47" lean-forward="true" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
+            <state relative-caret-position="3706">
+              <caret line="218" column="47" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -209,16 +196,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Business.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="119" column="50" selection-start-line="119" selection-start-column="50" selection-end-line="119" selection-end-column="50" />
+            <state relative-caret-position="388">
+              <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
               <folding>
                 <element signature="e#897#1914#0" />
                 <element signature="e#1920#2524#0" />
-                <element signature="e#2530#2827#0" />
-                <element signature="e#3474#4087#0" />
-                <element signature="e#3451#3566#0" />
-                <element signature="e#4236#4833#0" />
-                <element signature="e#3691#3835#0" />
+                <element signature="e#3517#4035#0" />
+                <element signature="e#4040#4155#0" />
+                <element signature="e#4280#4765#0" />
+                <element signature="e#4770#4914#0" />
               </folding>
             </state>
           </provider>
@@ -227,8 +213,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/HelperFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="50" column="69" selection-start-line="50" selection-start-column="69" selection-end-line="50" selection-end-column="69" />
+            <state relative-caret-position="340">
+              <caret line="153" selection-start-line="153" selection-end-line="153" />
               <folding>
                 <element signature="method#formatParams#0;class#HelperFunctions#0" />
                 <element signature="method#urlGetRequest#0;class#HelperFunctions#0" />
@@ -245,7 +231,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/YelpDetails.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
+            <state relative-caret-position="340">
               <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -2329,8 +2315,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GooglePlace.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GoogleMaps.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Yelp.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java" />
       </list>
     </option>
   </component>
@@ -2341,10 +2327,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="736" />
-    <option name="y" value="-9" />
-    <option name="width" value="2579" />
-    <option name="height" value="1409" />
+    <option name="x" value="735" />
+    <option name="y" value="-10" />
+    <option name="width" value="2580" />
+    <option name="height" value="1410" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -2462,7 +2448,7 @@
   <component name="PropertiesComponent">
     <property name="android.profiler.active" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545374281825" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545544466512" />
     <property name="device.picker.selection" value="36593551314f3098" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -2564,7 +2550,7 @@
       <window_info anchor="bottom" id="Build" order="7" weight="0.2225579" />
       <window_info anchor="bottom" id="Android Profiler" order="8" weight="0.32930514" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.500999" side_tool="true" weight="0.326284" />
-      <window_info anchor="bottom" id="Logcat" order="10" sideWeight="0.499001" visible="true" weight="0.326284" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="10" sideWeight="0.499001" visible="true" weight="0.326284" />
       <window_info anchor="bottom" id="Version Control" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32930514" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32930514" />
@@ -2704,113 +2690,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/APICalls.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="27" lean-forward="true" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/APICalls.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/APICall.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="20" lean-forward="true" selection-start-line="5" selection-start-column="20" selection-end-line="5" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/YelpDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/HelperFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="50" column="69" selection-start-line="50" selection-start-column="69" selection-end-line="50" selection-end-column="69" />
-          <folding>
-            <element signature="method#formatParams#0;class#HelperFunctions#0" />
-            <element signature="method#urlGetRequest#0;class#HelperFunctions#0" />
-            <element signature="method#formatLong#0;class#HelperFunctions#0" />
-            <element signature="method#formatLat#0;class#HelperFunctions#0" />
-            <element signature="method#formatLoc#0;class#HelperFunctions#0" />
-            <element signature="method#formatDist#0;class#HelperFunctions#0" />
-            <element signature="method#formatPrices#0;class#HelperFunctions#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GooglePlace.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
-          <folding>
-            <element signature="method#getData#0;class#GooglePlace#0" />
-            <element signature="method#setupURL#0;class#GooglePlace#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="139" selection-start-line="139" selection-end-line="139" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#Running#0;class#Running#0" />
-            <element signature="method#randomInts#0;class#Running#0" />
-            <element signature="method#nextBus#0;class#Running#0" />
-            <element signature="method#prevBus#0;class#Running#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="96" column="28" selection-start-line="96" selection-start-column="28" selection-end-line="96" selection-end-column="28" />
-          <folding>
-            <element signature="method#onCreate#0;class#SecondActivity#0" />
-            <element signature="method#nextButton#0;class#SecondActivity#0" />
-            <element signature="method#prevButton#0;class#SecondActivity#0" />
-            <element signature="method#loadText#0;class#SecondActivity#0" />
-            <element signature="method#hideViews#0;class#SecondActivity#0" />
-            <element signature="method#displayViews#0;class#SecondActivity#0" />
-            <element signature="method#loadAll#0;class#SecondActivity#0" />
-            <element signature="class#runTask#0;class#SecondActivity#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Business.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="119" column="50" selection-start-line="119" selection-start-column="50" selection-end-line="119" selection-end-column="50" />
-          <folding>
-            <element signature="e#897#1914#0" />
-            <element signature="e#1920#2524#0" />
-            <element signature="e#2530#2827#0" />
-            <element signature="e#3474#4087#0" />
-            <element signature="e#3451#3566#0" />
-            <element signature="e#4236#4833#0" />
-            <element signature="e#3691#3835#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GoogleMaps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="method#GoogleMaps#0;class#GoogleMaps#0" />
-            <element signature="method#getData#0;class#GoogleMaps#0" />
-            <element signature="method#setupURL#0;class#GoogleMaps#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2831,8 +2715,100 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_second.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="218" column="47" lean-forward="true" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
+        <state relative-caret-position="3706">
+          <caret line="218" column="47" selection-start-line="218" selection-start-column="47" selection-end-line="218" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GooglePlace.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <folding>
+            <element signature="method#getData#0;class#GooglePlace#0" />
+            <element signature="method#setupURL#0;class#GooglePlace#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/HelperFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
+          <folding>
+            <element signature="method#formatParams#0;class#HelperFunctions#0" />
+            <element signature="method#urlGetRequest#0;class#HelperFunctions#0" />
+            <element signature="method#formatLong#0;class#HelperFunctions#0" />
+            <element signature="method#formatLat#0;class#HelperFunctions#0" />
+            <element signature="method#formatLoc#0;class#HelperFunctions#0" />
+            <element signature="method#formatDist#0;class#HelperFunctions#0" />
+            <element signature="method#formatPrices#0;class#HelperFunctions#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/YelpDetails.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Business.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="104" column="48" selection-start-line="104" selection-start-column="48" selection-end-line="104" selection-end-column="48" />
+          <folding>
+            <element signature="e#897#1914#0" />
+            <element signature="e#1920#2524#0" />
+            <element signature="e#3517#4035#0" />
+            <element signature="e#4040#4155#0" />
+            <element signature="e#4280#4765#0" />
+            <element signature="e#4770#4914#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/SecondActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="105" column="30" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+          <folding>
+            <element signature="method#onCreate#0;class#SecondActivity#0" />
+            <element signature="method#prevButton#0;class#SecondActivity#0" />
+            <element signature="method#loadText#0;class#SecondActivity#0" />
+            <element signature="method#hideViews#0;class#SecondActivity#0" />
+            <element signature="method#displayViews#0;class#SecondActivity#0" />
+            <element signature="method#loadAll#0;class#SecondActivity#0" />
+            <element signature="class#runTask#0;class#SecondActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/GoogleMaps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="method#GoogleMaps#0;class#GoogleMaps#0" />
+            <element signature="method#getData#0;class#GoogleMaps#0" />
+            <element signature="method#setupURL#0;class#GoogleMaps#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pigout/juronemo/pigout/Running.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="44" column="29" selection-start-line="44" selection-start-column="29" selection-end-line="44" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#randomInts#0;class#Running#0" />
+            <element signature="method#prevBus#0;class#Running#0" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -101,16 +101,21 @@ public class SecondActivity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
 
-         // haven't yet got the next Business, run ASyncTask
-        }else if (currentRun.peekBus() == null){
+        }else{
             runTask newTask = new runTask();
             newTask.execute();
-
-         //have got next Business, don't run ASyncTask
-        }else{
-            currentBus = currentRun.nextBus();
-            loadAll();
         }
+
+//         // haven't yet got the next Business, run ASyncTask
+//        }else if (currentRun.peekBus() == null){
+//            runTask newTask = new runTask();
+//            newTask.execute();
+//
+//         //have got next Business, don't run ASyncTask
+//        }else{
+//            currentBus = currentRun.nextBus();
+//            loadAll();
+//        }
 
     }
 

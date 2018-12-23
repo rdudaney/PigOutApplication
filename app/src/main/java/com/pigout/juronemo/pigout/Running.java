@@ -1,7 +1,11 @@
 package com.pigout.juronemo.pigout;
 
+import android.content.Context;
 import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,9 +32,18 @@ public class Running {
         this.Origin = startOrigin;
         this.current = -1;
 
-        String Yelp_key = "pG_pwQY1r_ignzPv3SKAmz6Ip9AVO7HcXdoDghDjRJZrL236pAMmCc4NAhv6OfgUBci0WGwlK3RoA1M2HxBs-RZUbqO_OfZBsalIiqdO2ezlDyK3VrFbXkixChcGXHYx";
-        String Google_key = "AIzaSyBIolQrPxm9ZOFYSje8ExlmRnGJlj9sdz4";
-        String GooglePlace_key = "AIzaSyBIolQrPxm9ZOFYSje8ExlmRnGJlj9sdz4";
+//        InputStream inputStream = context.getResources().openRawResource(R.raw.APIKEYS);
+//        BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(inputStream));
+//        String eachline = bufferedReader.readLine();
+//        while (eachline != null) {
+//            // `the words in the file are separated by space`, so to get each words
+//            String[] words = eachline.split(" ");
+//            eachline = bufferedReader.readLine();
+//        }
+
+        String Yelp_key = "";
+        String Google_key = "";
+        String GooglePlace_key = Google_key;
 
         this.yelp = new Yelp(Yelp_key,URLParam);
         this.googlePlace = new GooglePlace(GooglePlace_key);
