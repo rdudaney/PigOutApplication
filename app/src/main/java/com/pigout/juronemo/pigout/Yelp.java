@@ -7,12 +7,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class Yelp {
+public class Yelp implements Serializable {
 
     private static final int MAX_LIMIT= 50;
     private static final int MAX_BUSINESS= 1000;

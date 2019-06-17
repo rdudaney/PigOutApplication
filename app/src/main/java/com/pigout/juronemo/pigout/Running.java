@@ -6,13 +6,14 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
-public class Running {
+public class Running implements Serializable {
 
     private int total;
     private Business[] businessArray;
@@ -32,17 +33,9 @@ public class Running {
         this.Origin = startOrigin;
         this.current = -1;
 
-//        InputStream inputStream = context.getResources().openRawResource(R.raw.APIKEYS);
-//        BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(inputStream));
-//        String eachline = bufferedReader.readLine();
-//        while (eachline != null) {
-//            // `the words in the file are separated by space`, so to get each words
-//            String[] words = eachline.split(" ");
-//            eachline = bufferedReader.readLine();
-//        }
 
-        String Yelp_key = "";
-        String Google_key = "";
+        String Yelp_key = "Gy0tdl5hQx6iD5EcUYVOGxTSXJrLb415QyNSO9Qc-LFjBqJkL3QNFQHk6l3Qz4PrdF69V9O9PXfzBbgDDjZLiP3Dy0i2201WdcJLuJ_OQYAJ21qw3Dj0rNQ5bY0cXHYx";
+        String Google_key = "AIzaSyB1FbpoGYFZn2XuvAzFFMvw-vWV0ujLWAY";
         String GooglePlace_key = Google_key;
 
         this.yelp = new Yelp(Yelp_key,URLParam);
@@ -90,26 +83,29 @@ public class Running {
 
     public Business nextBus(){
 
+        // End of list
         if(this.current + 1 >= this.total){
             return null;
         }
+        // Next Business is not null
         else if(this.businessArray[(this.randomIntArray[this.current + 1])] != null) {
             this.current++;
 
+            // Google Maps/ Duration information is Null then find it
             if(this.googleMaps != null && !this.businessArray[(this.randomIntArray[this.current])].getDurationBool())
             {
                 this.googleMaps.getData(this.businessArray[(this.randomIntArray[this.current])]);
             }
 
+            // Google Place information is Null then find it
             if(!this.businessArray[(this.randomIntArray[this.current])].getGooglePlaceBool()){
                 this.googlePlace.getData(this.businessArray[(this.randomIntArray[this.current])]);
             }
 
-
-
             return businessArray[this.randomIntArray[this.current]];
-        }else{
-            // Business not already found
+        }
+        // Next Business is Null
+        else{
 
             this.current++;
 

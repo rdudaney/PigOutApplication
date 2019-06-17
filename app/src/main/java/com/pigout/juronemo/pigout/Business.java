@@ -5,17 +5,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Business {
+import java.io.Serializable;
 
-//    private String name;
-//    private double rating;
-//    private String price;
-//    private int price_int;
-//    private JSONObject address_obj;
-//    private String address_string;
-//    private int numRating;
+public class Business implements Serializable {
 
-//    private String id;
+    // Yelp Search
+    private String id;
     private String name;
     private double rating;
     private String price;
@@ -28,10 +23,14 @@ public class Business {
     private String imageURL;
     private double distance;
     private String type;
+
+    // Google Maps
     private Boolean durationBool;
+
+    // Google Place Search
     private double googleRating;
     private Boolean googlePlaceBool;
-    private String id;
+
 
 
     public Business(JSONObject startObj){
@@ -99,7 +98,6 @@ public class Business {
 
         return coordinates;
     }
-
     public String getName(){return this.name;}
     public double getRating(){return this.rating;}
     public String getPrice(){return this.price;}
@@ -116,7 +114,7 @@ public class Business {
     public String getId(){return this.id;}
 
 
-    // Google Maps functions
+    // Google Maps
     public void setGoogleMaps(JSONObject Response){
 
         JSONObject rows;
@@ -138,7 +136,7 @@ public class Business {
     public double getDuration(){return this.duration;}
     public Boolean getDurationBool(){return this.durationBool;}
 
-    // Google Place functions
+    // Google Place Search
     public void setGooglePlace(JSONObject Response){
         double rating = -1;
         String status = "";
@@ -163,6 +161,12 @@ public class Business {
     public Boolean getGooglePlaceBool(){return this.googlePlaceBool;}
     public double getGoogleRating(){return this.googleRating;}
 
+    // Google Place Details
+
+    // Google Place Photos
+
+    // string[] getGooglePhotos()  gets a list of google photo urls (https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,rating,formatted_phone_number&key=YOUR_API_KEY)
+    // need to pass
 
 
 }

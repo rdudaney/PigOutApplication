@@ -2,6 +2,7 @@ package com.pigout.juronemo.pigout;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -42,9 +43,10 @@ public class SecondActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
+
+
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar2);
         setSupportActionBar(myToolbar);
-
 
 
         this.prevBut = findViewById(R.id.prev_button);
@@ -66,17 +68,6 @@ public class SecondActivity extends AppCompatActivity {
         this.GoogleRating_Text =findViewById(R.id.GoogleRatingText);
         this.GoogleRating_Image =findViewById(R.id.GoogleRatingImage);
 
-        Intent intent = getIntent();
-        URLParam = (HashMap<String, String>)intent.getSerializableExtra("URLParam");
-        Origin = intent.getDoubleArrayExtra("Origin");
-
-
-
-
-        hideViews();
-
-        runTask newTask = new runTask();
-        newTask.execute();
 
         nextBut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +83,60 @@ public class SecondActivity extends AppCompatActivity {
         });
 
 
+        Log.d("State","onCreate called");
+        if(savedInstanceState == null) {
+            Log.d("State","savedInstanceState is NULL");
+            Intent intent = getIntent();
+            URLParam = (HashMap<String, String>) intent.getSerializableExtra("URLParam");
+            Origin = intent.getDoubleArrayExtra("Origin");
+
+
+            hideViews();
+
+            runTask newTask = new runTask();
+            newTask.execute();
+
+        }else{
+            Log.d("State","savedInstanceState is NOT NULL");
+            hideViews();
+            currentRun = (Running) savedInstanceState.getSerializable("currentRun");
+            currentBus = (Business) savedInstanceState.getSerializable("currentBus");
+
+            loadAll();
+
+
+        }
     }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable("currentBus",currentBus);
+        outState.putSerializable("currentRun",currentRun);
+
+        Log.d("STATE","SAve INSTANTCE CAlled");
+    }
+
+//    @Override
+//    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//
+//        currentRun = (Running) savedInstanceState.getSerializable("currentRun");
+//        currentBus = (Business) savedInstanceState.getSerializable("currentBus");
+//
+//
+//        Log.d("STATE","Restore INSTANTCE CAlled");
+//        if (currentRun == null){
+//            Log.d("STATE","current Run null");
+//        }else{
+//            Log.d("STATE","current Run NOT null");
+//        }
+//        loadAll();
+//
+//    }
+
 
     public void nextButton(){
 
@@ -101,22 +145,29 @@ public class SecondActivity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER,0,0);
             toast.show();
 
-        }else{
-            runTask newTask = new runTask();
-            newTask.execute();
-        }
-
-//         // haven't yet got the next Business, run ASyncTask
-//        }else if (currentRun.peekBus() == null){
+//        }else{
 //            runTask newTask = new runTask();
 //            newTask.execute();
-//
-//         //have got next Business, don't run ASyncTask
-//        }else{
-//            currentBus = currentRun.nextBus();
-//            loadAll();
 //        }
 
+//         // haven't yet got the next Business, run ASyncTask
+        }else if (currentRun.peekBus() == null){
+            runTask newTask = new runTask();
+            newTask.execute();
+
+         //have got next Business, don't run ASyncTask
+        }else{
+            currentBus = currentRun.nextBus();
+            loadAll();
+        }
+
+    }
+
+    public void select_Click(View view){
+
+        Intent goBusinessDetail = new Intent(this, BusinessDetailActivity.class);
+        goBusinessDetail.putExtra("CurrentBus",currentBus);
+        startActivity(goBusinessDetail);
     }
 
     public void prevButton(){
@@ -215,6 +266,7 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     public void displayViews(){
+        progBar.setVisibility(View.GONE);
         nextBut.setVisibility(View.VISIBLE);
         prevBut.setVisibility(View.VISIBLE);
         selBut.setVisibility(View.VISIBLE);

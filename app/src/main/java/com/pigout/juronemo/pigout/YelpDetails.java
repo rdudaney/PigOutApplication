@@ -5,10 +5,11 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class YelpDetails {
+public class YelpDetails implements Serializable {
     private String API_Key;
 
     public YelpDetails(String startAPI_Key){
