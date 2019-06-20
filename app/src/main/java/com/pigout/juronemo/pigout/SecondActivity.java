@@ -2,7 +2,6 @@ package com.pigout.juronemo.pigout;
 
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,7 @@ import java.util.HashMap;
 
 public class SecondActivity extends AppCompatActivity {
 
-    public Running currentRun;
+    public SearchRun currentRun;
     private Business currentBus;
     private TextView BusinessName_Text;
     private TextView Address_Text;
@@ -99,7 +98,7 @@ public class SecondActivity extends AppCompatActivity {
         }else{
             Log.d("State","savedInstanceState is NOT NULL");
             hideViews();
-            currentRun = (Running) savedInstanceState.getSerializable("currentRun");
+            currentRun = (SearchRun) savedInstanceState.getSerializable("currentRun");
             currentBus = (Business) savedInstanceState.getSerializable("currentBus");
 
             loadAll();
@@ -123,7 +122,7 @@ public class SecondActivity extends AppCompatActivity {
 //    protected void onRestoreInstanceState(Bundle savedInstanceState) {
 //        super.onRestoreInstanceState(savedInstanceState);
 //
-//        currentRun = (Running) savedInstanceState.getSerializable("currentRun");
+//        currentRun = (SearchRun) savedInstanceState.getSerializable("currentRun");
 //        currentBus = (Business) savedInstanceState.getSerializable("currentBus");
 //
 //
@@ -151,7 +150,7 @@ public class SecondActivity extends AppCompatActivity {
 //        }
 
 //         // haven't yet got the next Business, run ASyncTask
-        }else if (currentRun.peekBus() == null){
+        }else if ((currentRun.peekBus() == null) || (currentRun.getGoogleMaps() != null && currentRun.peekBus().getGoogleMapsBool() == false) || (currentRun.peekBus().getGooglePlaceSearchBool() == false) ) {
             runTask newTask = new runTask();
             newTask.execute();
 
@@ -220,7 +219,7 @@ public class SecondActivity extends AppCompatActivity {
         RandomNum_Text.setText("NUM IN RANDOM: " + currentRun.getRandom() + " / " + currentRun.getTotal());
         Distance_Text.setText(String.format("%.1f", currentBus.getDistance()) + " mi");
 
-        if (currentBus.getDuration() == 0 || currentBus.getDuration() == -1 || !currentBus.getDurationBool()){
+        if (currentBus.getDuration() == 0 || currentBus.getDuration() == -1 || !currentBus.getGoogleMapsBool()){
             Time_Text.setVisibility(View.GONE);
         }else{
             Time_Text.setText(Long.toString(Math.round(currentBus.getDuration())) + " min");
@@ -275,7 +274,7 @@ public class SecondActivity extends AppCompatActivity {
         //Rating_Text.setVisibility(View.VISIBLE);
         Rating_Image.setVisibility(View.VISIBLE);
         NumRating_Text.setVisibility(View.VISIBLE);
-        if (currentBus.getDuration() == 0 || currentBus.getDuration() == -1 || !currentBus.getDurationBool()) {
+        if (currentBus.getDuration() == 0 || currentBus.getDuration() == -1 || !currentBus.getGoogleMapsBool()) {
             Time_Text.setVisibility(View.GONE); //TODO: Eventually combine this and the one before
         }else{
             Time_Text.setVisibility(View.VISIBLE);
@@ -353,7 +352,7 @@ public class SecondActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             if (currentRun == null) {
-                currentRun = new Running(URLParam, Origin);
+                currentRun = new SearchRun(URLParam, Origin);
 
 
             }

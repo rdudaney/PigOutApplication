@@ -31,19 +31,18 @@ import com.google.android.gms.location.*;
 
 import java.util.HashMap;
 import java.util.Objects;
+// TODO: Case where google details can't find id, odn't have slideshow
 // TODO: GooglePlace Details or YelpDetails (Google may return up to 10 photos)
-// TODO: Save filter instance state
+// TODO: Fix Bug with first business not showing google starts when prevButton hit
 // TODO: Change distance from Yelp to Google
 // TODO: fix locationRequest returning null when first initialized
 // TODO: Add constraints (distance, minimum rating) and search Keyword
 // TODO: Display Category, phone number, website
-// TODO: Get Google Place rating
 // TODO: Add additional information when business is selected
 // TODO: Sort by rating?
 // TODO: Add location from wifi, automatically see if location updated
 // TODO: Make Address clickable to Google maps, and Yelp link to yelp
 // TODO: Wrapper class that only contains Business, GoogleMaps, YelpPLace, and GooglePLace
-// TODO: If next Bus is not null, do not use ASyncTask
 
 public class MainActivity extends AppCompatActivity {
 

@@ -137,7 +137,9 @@
             android:id="@+id/address"
             android:gravity="start"
             android:textColor="@color/colorGrey"
-            android:textIsSelectable="true"/>
+            android:textIsSelectable="true"
+            android:autoLink="map"/>
+
 
     <TextView
             android:text="PRICE"

@@ -1,11 +1,13 @@
 package com.pigout.juronemo.pigout;
 
-import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Business implements Serializable {
 
@@ -19,18 +21,22 @@ public class Business implements Serializable {
     private double latitude;
     private double longitude;
     private double[] coordinates;
-    private double duration;
     private String imageURL;
     private double distance;
     private String type;
 
     // Google Maps
-    private Boolean durationBool;
+    private double duration;
+    private Boolean googleMapsBool = false;
 
     // Google Place Search
     private double googleRating;
-    private Boolean googlePlaceBool;
+    private Boolean googlePlaceSearchBool = false;
+    private String googlePlaceSearchID;
 
+    // Google Place Details
+    private Boolean googlePlaceDetailsBool = false;
+    ArrayList<String> googlePhotoList;
 
 
     public Business(JSONObject startObj){
@@ -55,8 +61,8 @@ public class Business implements Serializable {
             this.price = "N/A";
         }
 
-        this.durationBool = false;
-        this.googlePlaceBool = false;
+        this.googleMapsBool = false;
+        this.googlePlaceSearchBool = false;
         this.latitude = this.coordinates[0];
         this.longitude = this.coordinates[1];
 
@@ -86,7 +92,7 @@ public class Business implements Serializable {
     }
 
 
-    // Yelp functions
+    // Yelp Search functions
     private double[] setCoor(JSONObject coor){
         double[] coordinates = new double[2];
 
@@ -127,22 +133,25 @@ public class Business implements Serializable {
             this.duration = -1;
 
         }
-        this.durationBool = true;
+        this.googleMapsBool = true;
     }
     public void setDuration(double startDur){
         this.duration = startDur;
-        this.durationBool = true;
+        this.googleMapsBool = true;
     }
     public double getDuration(){return this.duration;}
-    public Boolean getDurationBool(){return this.durationBool;}
+    public void setGoogleMapsBool(Boolean startBool){this.googleMapsBool = startBool;}
+    public Boolean getGoogleMapsBool(){return this.googleMapsBool;}
 
     // Google Place Search
-    public void setGooglePlace(JSONObject Response){
+    public void setGooglePlaceSearch(JSONObject Response){
         double rating = -1;
         String status = "";
         try {
-            rating = Response.getJSONArray("candidates").getJSONObject(0).getDouble("rating");
+            JSONObject firstCandidate = Response.getJSONArray("candidates").getJSONObject(0);
+            rating = firstCandidate.getDouble("rating");
             status = Response.getString("status");
+            this.googlePlaceSearchID = firstCandidate.getString("place_id");
         }catch (Exception e){
         }
 
@@ -151,17 +160,41 @@ public class Business implements Serializable {
         }
 
         this.googleRating = rating;
-        this.googlePlaceBool = true;
+        this.googlePlaceSearchBool = true;
 
     }
     public void setGoogleRating(double startGoogleRating){
         this.googleRating = startGoogleRating;
-        this.googlePlaceBool = true;
+        this.googlePlaceSearchBool = true;
     }
-    public Boolean getGooglePlaceBool(){return this.googlePlaceBool;}
     public double getGoogleRating(){return this.googleRating;}
+    public String getGooglePlaceSearchID(){return this.googlePlaceSearchID;}
+    public Boolean getGooglePlaceSearchBool(){return this.googlePlaceSearchBool;}
+
 
     // Google Place Details
+    public void setGooglePlaceDetails(JSONObject Response){
+        try {
+            this.googlePhotoList = new ArrayList<String>();
+            JSONObject results = Response.getJSONObject("result");
+            JSONArray photos = results.getJSONArray("photos");
+
+            for(int i = 0; i < photos.length();i++) {
+                JSONObject photoInfo = photos.getJSONObject(i);
+                googlePhotoList.add("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=" + photoInfo.getString("photo_reference") + "&key=" + APIKeys.getGoogleKey());
+            }
+
+
+        }catch (Exception e){
+        }
+
+
+    }
+    public Boolean getGooglePlaceDetailsBool(){return this.googlePlaceDetailsBool;}
+    public ArrayList<String> getGooglePhotoList(){return this.googlePhotoList;}
+
+
+
 
     // Google Place Photos
 
