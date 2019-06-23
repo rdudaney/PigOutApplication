@@ -28,13 +28,22 @@ public class BusinessDetailActivity extends AppCompatActivity {
 
         this.currentBus = (Business) intent.getSerializableExtra("CurrentBus");
 
-        if(this.currentBus.getGooglePlaceDetailsBool() == false) {
+        if (this.currentBus.getGooglePlaceDetailsBool() == false) {
             runTask newTask = new runTask();
             newTask.execute();
-        }else{
+        } else {
             dispImageView();
         }
 
+
+    }
+
+    public void back_Click(View view) {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("currentBus",currentBus);
+
+        setResult(RESULT_OK, resultIntent);
+        finish();
 
     }
 

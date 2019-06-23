@@ -184,7 +184,7 @@ public class Business implements Serializable {
                 googlePhotoList.add("https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=" + photoInfo.getString("photo_reference") + "&key=" + APIKeys.getGoogleKey());
             }
 
-
+            googlePlaceDetailsBool = true;
         }catch (Exception e){
         }
 

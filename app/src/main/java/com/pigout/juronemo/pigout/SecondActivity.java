@@ -2,6 +2,7 @@ package com.pigout.juronemo.pigout;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 
 public class SecondActivity extends AppCompatActivity {
 
+    private static final int BUSINESS_DETAIL_INTEGER_VALUE = 614;
     public SearchRun currentRun;
     private Business currentBus;
     private TextView BusinessName_Text;
@@ -37,6 +39,7 @@ public class SecondActivity extends AppCompatActivity {
     private HashMap<String, String> URLParam;
     private ProgressBar progBar;
     private double[] Origin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -166,8 +169,26 @@ public class SecondActivity extends AppCompatActivity {
 
         Intent goBusinessDetail = new Intent(this, BusinessDetailActivity.class);
         goBusinessDetail.putExtra("CurrentBus",currentBus);
-        startActivity(goBusinessDetail);
+
+
+        startActivityForResult(goBusinessDetail,BUSINESS_DETAIL_INTEGER_VALUE);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+
+
+        switch(requestCode) {
+            case (BUSINESS_DETAIL_INTEGER_VALUE): {
+                currentBus = (Business) data.getExtras().get("currentBus");
+                break;
+            }
+        }
+
+    }
+
 
     public void prevButton(){
         if (currentRun.getCurrent() == 0){
