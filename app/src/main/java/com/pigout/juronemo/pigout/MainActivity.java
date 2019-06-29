@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Intent goSecondView = new Intent(this, SecondActivity.class);
+        Intent goSecondView = new Intent(this, SecondActivity2.class);
         HashMap<String,String> URLParam = HelperFunctions.formatParams(locationVal,distanceVal,priceVal, origin);
         goSecondView.putExtra("URLParam",URLParam);
 

@@ -139,4 +139,46 @@ public class SearchRun implements Serializable {
         return this.businessArray[this.randomIntArray[this.current+1]];
     }
 
+
+    public Business getBusInd(int i){
+        if(i >= this.total){
+            return null;
+        }else if(this.businessArray[(this.randomIntArray[i])] != null){
+            // Google Maps/ Duration information is Null then find it
+            if(this.googleMaps != null && !this.businessArray[(this.randomIntArray[i])].getGoogleMapsBool())
+            {
+                this.googleMaps.getData(this.businessArray[(this.randomIntArray[i])]);
+            }
+
+            // Google Place information is Null then find it
+            if(!this.businessArray[(this.randomIntArray[i])].getGooglePlaceSearchBool()){
+                this.googlePlaceSearch.getData(this.businessArray[(this.randomIntArray[i])]);
+            }
+
+            return businessArray[this.randomIntArray[i]];
+
+        }else{
+            for (int j = i; j < i + SLICE; j++) {
+                if (j >= this.total){
+                    break;
+                }else if ((this.businessArray[this.randomIntArray[j]] == null)) {
+                    Business[] newBus = yelpSearch.get50(this.randomIntArray[j]);
+
+                    googlePlaceSearch.getData(newBus[0]);
+
+                    if (this.googleMaps != null) {
+                        this.googleMaps.getData(newBus[0]);
+                    }
+
+                    //this.yelpDetails.addInfo(newBus[0]); // TODO REMOVE THIS, ONLY FOR TEST
+
+                    for (int k = 0; k < newBus.length;k++){
+                        this.businessArray[this.randomIntArray[j]+k] = newBus[k];
+                    }
+                }
+            }
+            return businessArray[this.randomIntArray[i]];
+        }
+
+    }
 }

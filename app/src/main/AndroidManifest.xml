@@ -30,6 +30,8 @@
         </activity>
         <activity android:name=".BusinessDetailActivity">
         </activity>
+        <activity android:name=".SecondActivity2">
+        </activity>
     </application>
 
 </manifest>
