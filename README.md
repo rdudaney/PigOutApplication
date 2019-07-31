@@ -1,4 +1,6 @@
-#PigOut
-This is an android application for choosing a random restaurant
+PigOut
+(Still in Development)
 
-![](demo.gif)
+This is an android application for choosing a random restaurant given a location or using your current location.  Pulls data from Yelp and Google.
+
+![Demo](Demo.gif)
