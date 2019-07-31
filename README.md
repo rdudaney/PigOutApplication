@@ -1,4 +1,4 @@
-PigOut
+# PigOut
 (Still in Development)
 
 This is an android application written in Java for choosing a random restaurant given a location or using your current location.  Pulls data from Yelp and Google.
