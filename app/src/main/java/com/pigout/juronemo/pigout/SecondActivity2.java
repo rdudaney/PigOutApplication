@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.ProgressBar;
 
@@ -25,6 +26,9 @@ public class SecondActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second2);
 
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar2);
+        setSupportActionBar(myToolbar);
+
         if(savedInstanceState == null) {
             Log.d("State", "savedInstanceState is NULL");
             Intent intent = getIntent();
@@ -32,13 +36,9 @@ public class SecondActivity2 extends AppCompatActivity {
             origin = intent.getDoubleArrayExtra("Origin");
         }
 
-//        viewPager = findViewById(R.id.view_pager);
-//        adapter = new BusinessPageAdapter(URLParam,origin);
-//        viewPager.setAdapter(adapter);
-
-
         adapter = new BusinessFragmentCollectionAdapter(getSupportFragmentManager());
         adapter.setParameters(URLParam,origin);
+
 
         viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(adapter);

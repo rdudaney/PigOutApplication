@@ -1,37 +1,28 @@
 package com.pigout.juronemo.pigout;
 
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.view.LayoutInflater;
-import android.content.Context;
-import android.widget.TextView;
-
-import java.net.URL;
 import java.util.HashMap;
 import java.util.concurrent.ExecutionException;
 
+
 public class BusinessFragmentCollectionAdapter extends FragmentStatePagerAdapter {
     SearchRun currentRun;
-    Business currentBus;
     private HashMap<String, String> URLParam;
     private double[] origin;
-    int itemNum;
+    private int total;
 
 
     public BusinessFragmentCollectionAdapter(FragmentManager fm) {
         super(fm);
     }
 
-    public void setParameters(HashMap<String, String> startURLParam,double[] startOrigin)  {
+    public void setParameters(HashMap<String, String> startURLParam,double[] startOrigin){
         URLParam = startURLParam;
         origin = startOrigin;
+
     }
 
 
@@ -39,16 +30,15 @@ public class BusinessFragmentCollectionAdapter extends FragmentStatePagerAdapter
     @Override
     public int getCount() {
         return 1000;
-    }
+    } //TODO: Have this return CurrentRun.total()
 
 
 
     @Override
     public Fragment getItem(int i) {
-        itemNum = i;
         BusinessFragment businessFragment = new BusinessFragment();
 
-        run2Task newTask = new run2Task(i,businessFragment);
+        runTask newTask = new runTask(i,businessFragment);
         newTask.execute();
 
         return businessFragment;
@@ -58,12 +48,12 @@ public class BusinessFragmentCollectionAdapter extends FragmentStatePagerAdapter
 
 
 
-    private class run2Task extends AsyncTask<Void, Void, Void> {
+    private class runTask extends AsyncTask<Void, Void, Void> {
         int busNum;
         Business aSyncBus;
         BusinessFragment busFrag;
 
-        public run2Task(int startNum, BusinessFragment startFrag) {
+        public runTask(int startNum, BusinessFragment startFrag) {
             busNum = startNum;
             busFrag = startFrag;
         }
@@ -77,7 +67,10 @@ public class BusinessFragmentCollectionAdapter extends FragmentStatePagerAdapter
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            busFrag.update(aSyncBus);
+
+            if (busFrag != null) {
+                busFrag.update(aSyncBus);
+            }
         }
 
         @Override

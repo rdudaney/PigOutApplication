@@ -44,8 +44,8 @@
                 app:layout_constraintBottom_toBottomOf="@id/prev_button"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintTop_toTopOf="@id/prev_button"
-                android:layout_marginTop="8dp"/>
-        <!--android:onClick="select_Click"/> -->
+                android:layout_marginTop="8dp"
+                android:onClick="select_Click"/>
 
         <Button
                 android:id="@+id/prev_button"
@@ -78,16 +78,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorBlack"
                 android:textIsSelectable="true"/>
-        <TextView
-                android:text="@string/rating_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/randomNum"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginHorizontal="20sp"
-                android:id="@+id/rating"
-                android:gravity="start"
-                android:textColor="@color/colorGrey"/>
+
 
         <ImageView
                 android:text="@string/rating_image"
@@ -154,26 +145,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginHorizontal="20sp"
                 android:id="@+id/time"
-                android:gravity="start"
-                android:textColor="@color/colorGrey"/>
-        <TextView
-                android:text="@string/currentNum_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/address"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginHorizontal="20sp"
-                android:id="@+id/currentNum"
-                android:gravity="start"
-                android:textColor="@color/colorGrey"/>
-        <TextView
-                android:text="@string/randomNum_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/currentNum"
-                app:layout_constraintLeft_toLeftOf="parent"
-                android:layout_marginHorizontal="20sp"
-                android:id="@+id/randomNum"
                 android:gravity="start"
                 android:textColor="@color/colorGrey"/>
 
